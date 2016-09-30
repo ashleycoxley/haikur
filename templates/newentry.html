@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<form class='entry-form' method='post'>
+		<div class='form-header'>
+			<div id='username-box'>
+				{{username}}
+			</div>
+		</div>
+		<div class='entry-form-box'
+			<label for='stanza1'>5 SYLLABLES</label>
+			<input id='stanza1'>
+			<label for='stanza2'>7 SYLLABLES</label>
+			<input id='stanza2'>
+			<label for='stanza3'>5 SYLLABLES</label>
+			<input id='stanza3'>
+		</div>
+		<div class='form-footer'>
+			<div class='color-choice'>
+			</div>
+			<div class='button-box'>
+				<input type='submit' value='POST'>
+			</div>
+		</div>
+	</form>
+{% endblock %}

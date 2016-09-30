@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HAIKUr</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class='container'>
+		<header>
+			<h1>HAIKUr</h1>
+			<form id='add_new_button' action="/newpost">
+    			<input type="submit" value="Add a new post"/>
+			</form>
+		</header>
+		<section id='content'>
+			{% block content %}
+			{% endblock %}
+		</section>
+	</div>
+</body>
+</html>

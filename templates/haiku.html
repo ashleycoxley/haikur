@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for haiku in haikus: %}
+	<div class='haiku box'>
+		<div class='username-section'>
+			<p>{{haiku.username}}</p>
+		</div>
+		<div class='haiku-section'>
+			<p>{{haiku.content}}</p>
+		</div>
+		<!-- comment section placeholder -->
+<!-- 		<div class='comment-section'>
+			<div class='comment-header'></div>
+			{% for comment in haiku.comments: %}
+			<div class='comment-box'>
+				<p>{{comment.username}}</p>
+				<p>{{comment.content}}</p>
+			</div>
+			{% endfor %}
+			<div class='comment-footer'>
+		</div> -->
+	</div>
+	{% endfor %}
+
+{% endblock %}
