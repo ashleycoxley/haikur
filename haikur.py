@@ -70,7 +70,8 @@ class User(ndb.Model):
 
 
 class Haiku(ndb.Model):
-    username = ndb.KeyProperty(kind=User)
+    user_key = ndb.KeyProperty(kind=User)
+    username = ndb.StringProperty(required=True)
     stanza1 = ndb.StringProperty(required=True)
     stanza2 = ndb.StringProperty(required=True)
     stanza3 = ndb.StringProperty(required=True)
@@ -89,15 +90,28 @@ class Comment(ndb.Model):
 # HAIKU VALIDATION
 
 def validate_haiku(haiku_list):
-    valid = False
-    stanza1_error = stanza_invalid(haiku_list[0], 5)
-    stanza2_error = stanza_invalid(haiku_list[1], 7)
-    stanza3_error = stanza_invalid(haiku_list[2], 5)
+    template_values = {
+        'stanza1': '',
+        'stanza2': '',
+        'stanza3': ''
+        }
 
-    if stanza1_error == "" and stanza2_error == "" and stanza3_error == "":
-        valid = True
+    form_valid = False
+    template_values['stanza1_error'] = stanza_invalid(haiku_list[0], 5)
+    template_values['stanza2_error'] = stanza_invalid(haiku_list[1], 7)
+    template_values['stanza3_error'] = stanza_invalid(haiku_list[2], 5)
 
-    return stanza1_error, stanza2_error, stanza3_error, valid
+    if template_values['stanza1_error'] == "":
+        template_values['stanza1'] = haiku_list[0]
+    if template_values['stanza2_error'] == "":
+        template_values['stanza2'] = haiku_list[1]
+    if template_values['stanza3_error'] == "":
+        template_values['stanza3'] = haiku_list[2]
+
+    if template_values['stanza1_error'] == "" and template_values['stanza2_error'] == "" and template_values['stanza3_error'] == "":
+        form_valid = True
+
+    return form_valid, template_values
 
 
 def stanza_invalid(stanza, syllable_count):
@@ -111,7 +125,7 @@ def stanza_invalid(stanza, syllable_count):
 
 
 
-# USER VALIDATION
+# USER VALIDATION AND SIGNUP
 
 def validate_signup_item(form_input, input_type):
     validation = VALIDATION_RE[input_type]
@@ -120,7 +134,6 @@ def validate_signup_item(form_input, input_type):
 
 def user_exists(username):
     user_query = User.query(User.username==username)
-    logging.info('user_query: %s' % user_query.get())
     return user_query.get()
 
 
@@ -185,6 +198,14 @@ def login_valid(username, password):
     return form_valid, template_values
 
 
+def add_user(username, password, email):
+    password_hash = hash_password(username, password)
+    user = User(username=username, password_hash=password_hash)
+    if email:
+        user.email = email
+    return user.put()
+
+
 
 # ENCRYPTION AND COOKIES
 
@@ -214,7 +235,6 @@ def validate_password(username, password, stored_password):
 
 def login_password_valid(username, password):
     password_hash = lookup_password(username)
-    logging.info('password_hash: %s' % password_hash)
     return validate_password(username, password, password_hash)
 
 
@@ -236,57 +256,70 @@ def validate_cookie(cookie_hash):
 
 # PAGE HANDLERS
 
-class MainPageHandler(webapp2.RequestHandler):
+class HaikurHandler(webapp2.RequestHandler):
+    def set_user_cookie(self, user_id):
+        user_id_str = str(user_id)
+        cookie_str = build_cookie_str(user_id_str)
+        self.response.headers.add_header('Set-Cookie', cookie_str)
+
+    def read_user_cookie(self):
+        cookie_hash = self.request.cookies.get('user_id')
+        user_id = validate_cookie(cookie_hash)
+        return user_id
+
+    def remove_user_cookie(self):
+        self.response.headers.add_header(
+            'Set-Cookie',
+            'user_id=; Path=/')
+
+    def get_username_by_cookie(self):
+        user_id = self.read_user_cookie()
+        if user_id:
+            user = User.get_by_id(int(user_id))
+            return user.username
+
+
+class MainPageHandler(HaikurHandler):
     def get(self):
         haikus = Haiku.query().order(-Haiku.created_date)
-        cookie_hash = self.request.cookies.get('user_id')
-        returned_user_id = validate_cookie(cookie_hash)
-        if returned_user_id:
-            user_entity = User.get_by_id(int(returned_user_id))
-            signedin_username = user_entity.username
-            haiku_page = jinja_env.get_template('haiku.html')
-            self.response.write(haiku_page.render(
-                haikus=haikus,
-                signedin_username=signedin_username))
-        else:
-            haiku_page = jinja_env.get_template('haiku.html')
-            self.response.write(haiku_page.render(haikus=haikus))
+        signedin_username = self.get_username_by_cookie()
+        if not signedin_username:
+            signedin_username = ""
+        haiku_page = jinja_env.get_template('haiku.html')
+        self.response.write(haiku_page.render(
+            haikus=haikus,
+            signedin_username=signedin_username))
 
 
-class NewEntryHandler(webapp2.RequestHandler):
+class NewEntryHandler(HaikurHandler):
     def get(self):
-        cookie_hash = self.request.cookies.get('user_id')
-        returned_user_id = validate_cookie(cookie_hash)
-        if returned_user_id:
-            user_entity = User.get_by_id(int(returned_user_id))
-            signedin_username = user_entity.username
+        signedin_username = self.get_username_by_cookie()
+        if signedin_username:
             entry_form = jinja_env.get_template('newentry.html')
-            self.response.write(entry_form.render())
+            self.response.write(entry_form.render(
+                signedin_username=signedin_username))
         else:
             self.redirect('/login')
 
     def post(self):
-        cookie_hash = self.request.cookies.get('user_id')
-        returned_user_id = validate_cookie(cookie_hash)
-        if returned_user_id:
-            user_entity = User.get_by_id(int(returned_user_id))
-            username = user_entity.username
-        else:
-            self.redirect('login')
+        user_id = self.read_user_cookie()
+        if not user_id:
+            self.redirect('/login')
 
         stanza1 = self.request.get('stanza1')
         stanza2 = self.request.get('stanza2')
         stanza3 = self.request.get('stanza3')
 
-        stanza1_error, stanza2_error, stanza3_error, valid = validate_haiku([
+        form_valid, template_values = validate_haiku([
             stanza1,
             stanza2,
             stanza3
             ])
 
-        if valid:
+        if form_valid:
             haiku = Haiku(
-                username=user_entity.key,
+                user_key=User.get_by_id(int(user_id)).key,
+                username=User.get_by_id(int(user_id)).username,
                 stanza1=stanza1,
                 stanza2=stanza2,
                 stanza3=stanza3,
@@ -299,12 +332,15 @@ class NewEntryHandler(webapp2.RequestHandler):
         else:
             entry_form = jinja_env.get_template('newentry.html')
             self.response.write(entry_form.render(
-                stanza1_error=stanza1_error,
-                stanza2_error=stanza2_error,
-                stanza3_error=stanza3_error))
+                stanza1=template_values['stanza1'],
+                stanza2=template_values['stanza2'],
+                stanza3=template_values['stanza3'],
+                stanza1_error=template_values['stanza1_error'],
+                stanza2_error=template_values['stanza2_error'],
+                stanza3_error=template_values['stanza3_error']))
 
 
-class SingleHaikuHandler(webapp2.RequestHandler):
+class SingleHaikuHandler(HaikurHandler):
     def get(self, haiku_id):
         haiku_key = ndb.Key('Haiku', int(haiku_id))
         haiku = haiku_key.get()
@@ -317,7 +353,7 @@ class SingleHaikuHandler(webapp2.RequestHandler):
         self.response.write(single_haiku_page.render(haiku=haiku))
 
 
-class SignupHandler(webapp2.RequestHandler):
+class SignupHandler(HaikurHandler):
     def get(self):
         signup_form = jinja_env.get_template('/signup.html')
         self.response.write(signup_form.render())
@@ -335,16 +371,13 @@ class SignupHandler(webapp2.RequestHandler):
             email)
 
         if form_valid:
-            password_hash = hash_password(username, password)
-            user = User(username=username, password_hash=password_hash)
-            if email:
-                user.email = email
-            user_key = user.put()
-            user_id = str(user_key.id())
-            cookie_str = build_cookie_str(user_id)
-
-            self.response.headers.add_header('Set-Cookie', cookie_str)
-            self.redirect('/success')
+            user_key = add_user(username, password, email)
+            if user_key:
+                user_id = user_key.id()
+                self.set_user_cookie(user_id)
+                self.redirect('/')
+            else:
+                self.redirect('/signup')
 
         else:
             signup_form = jinja_env.get_template('/signup.html')
@@ -357,28 +390,11 @@ class SignupHandler(webapp2.RequestHandler):
                 email_error=template_values['email_error']))
 
 
-class LoginSuccessHandler(webapp2.RequestHandler):
+class LoginHandler(HaikurHandler):
     def get(self):
-        cookie_hash = self.request.cookies.get('user_id')
-        returned_user_id = validate_cookie(cookie_hash)
-        if returned_user_id:
-            user_entity = User.get_by_id(int(returned_user_id))
-            signedin_username = user_entity.username
-            haikus = Haiku.query().order(-Haiku.created_date)
-            haiku_page = jinja_env.get_template('haiku.html')
-            self.response.write(haiku_page.render(
-                signedin_username=signedin_username,
-                haikus=haikus))
-        else:
-            self.redirect('/signup')
-
-
-class LoginHandler(webapp2.RequestHandler):
-    def get(self):
-        cookie_hash = self.request.cookies.get('user_id')
-        returned_user_id = validate_cookie(cookie_hash)
-        if returned_user_id:
-            self.redirect('/success')
+        user_id = self.read_user_cookie()
+        if user_id:
+            self.redirect('/')
         else:
             login_page = jinja_env.get_template('login.html')
             self.response.write(login_page.render())
@@ -391,10 +407,8 @@ class LoginHandler(webapp2.RequestHandler):
 
         if form_valid:
             user_id = User.query(User.username==username).get().key.id()
-            user_id_str = str(user_id)
-            cookie_str = build_cookie_str(user_id_str)
-            self.response.headers.add_header('Set-Cookie', cookie_str)
-            self.redirect('/success')
+            self.set_user_cookie(user_id)
+            self.redirect('/')
         else:
             login_page = jinja_env.get_template('login.html')
             self.response.write(login_page.render(
@@ -404,9 +418,9 @@ class LoginHandler(webapp2.RequestHandler):
                 )
 
 
-class LogoutHandler(webapp2.RequestHandler):
+class LogoutHandler(HaikurHandler):
     def get(self):
-        self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
+        self.remove_user_cookie()
         self.redirect('/')
 
 
@@ -414,7 +428,6 @@ app = webapp2.WSGIApplication([
     ('/', MainPageHandler),
     ('/newpost', NewEntryHandler),
     ('/signup', SignupHandler),
-    ('/success', LoginSuccessHandler),
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
     ('/(\w+)', SingleHaikuHandler)
