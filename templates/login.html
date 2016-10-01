@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<form class='login-form' method='post'>
+		<div class='form-header'>
+			<h2>LOG IN</h2>
+		</div>
+		<div class='login-form-box'
+			<div class = 'signup-entry-row'>
+				<label for='username'>USERNAME</label>
+				<input type='text' name='username' value='{{username}}'>
+				{{username_error}}
+			</div>
+			<div class = 'signup-entry-row'>
+				<label for='password'>PASSWORD</label>
+				<input type='password' name='password'>
+				{{password_error}}
+			</div>
+		</div>
+		<div class='form-footer'>
+			<div class='button-box'>
+				<input type='submit' value='LOG IN'>
+			</div>
+		</div>
+	</form>
+{% endblock %}

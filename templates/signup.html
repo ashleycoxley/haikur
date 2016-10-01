@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<form class='signup-form' method='post'>
+		<div class='form-header'>
+			<h2>SIGN UP TO START KUin'</h2>
+		</div>
+		<div class='signup-form-box'
+			<div class = 'signup-entry-row'>
+				<label for='username'>USERNAME</label>
+				<input type='text' name='username' value='{{username}}'>
+				{{username_error}}
+			</div>
+			<div class = 'signup-entry-row'>
+				<label for='password'>PASSWORD</label>
+				<input type='password' name='password'>
+				{{password_error}}
+			</div>
+			<div class = 'signup-entry-row'>
+				<label for='verify'>VERIFY PASSWORD</label>
+				<input type='password' name='verify'>
+				{{verify_error}}
+			</div>
+			<div class = 'signup-entry-row'>
+				<label for='email'>EMAIL (optional)</label>
+				<input type='text' name='email' value='{{email}}'>
+				{{email_error}}
+			</div>
+		</div>
+		<div class='form-footer'>
+			<div class='button-box'>
+				<input type='submit' value='SIGN ME UP'>
+			</div>
+		</div>
+	</form>
+{% endblock %}

@@ -7,10 +7,16 @@
 <body>
 	<div class='container'>
 		<header>
-			<h1>HAIKUr</h1>
-			<form id='add_new_button' action="/newpost">
+			<div class='logo-box'>
+				<h1>HAIKUr</h1>
+				<!-- LOGO HERE -->
+			</div>
+			<div class='menu-box'>
+				<h3>{{signedin_username}}<h3>
+				<form id='add_new_button' action="/newpost">
     			<input type="submit" value="Add a new post"/>
 			</form>
+			</div>
 		</header>
 		<section id='content'>
 			{% block content %}
