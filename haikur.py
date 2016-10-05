@@ -7,6 +7,7 @@ import string
 import hashlib
 import hmac
 import logging
+import urlparse
 
 from google.appengine.ext import ndb
 
@@ -77,14 +78,17 @@ class Haiku(ndb.Model):
     stanza3 = ndb.StringProperty(required=True)
     created_date = ndb.DateTimeProperty(auto_now_add=True)
     edited_date = ndb.DateTimeProperty()
-    like_count = ndb.IntegerProperty(default=0)
+    upvotes = ndb.IntegerProperty(default=0)
+    downvotes = ndb.IntegerProperty(default=0)
 
 
 class Comment(ndb.Model):
-    refers_to = ndb.KeyProperty(kind=Haiku)
-    username = ndb.KeyProperty(kind=User)
-    comment = ndb.TextProperty(required=True)
-
+    haiku_ref = ndb.KeyProperty(kind=Haiku)
+    user_key = ndb.KeyProperty(kind=User)
+    username = ndb.TextProperty(required=True)
+    comment_text = ndb.TextProperty(required=True)
+    created_date = ndb.DateTimeProperty(auto_now_add=True)
+    edited_date = ndb.DateTimeProperty()
 
 
 # HAIKU VALIDATION
@@ -254,6 +258,7 @@ def validate_cookie(cookie_hash):
         return returned_user_id
 
 
+
 # PAGE HANDLERS
 
 class HaikurHandler(webapp2.RequestHandler):
@@ -276,19 +281,25 @@ class HaikurHandler(webapp2.RequestHandler):
         user_id = self.read_user_cookie()
         if user_id:
             user = User.get_by_id(int(user_id))
-            return user.username
+            if user:
+                return user.username
 
 
 class MainPageHandler(HaikurHandler):
     def get(self):
         haikus = Haiku.query().order(-Haiku.created_date)
         signedin_username = self.get_username_by_cookie()
-        if not signedin_username:
+        if signedin_username is None:
             signedin_username = ""
         haiku_page = jinja_env.get_template('haiku.html')
+        for haiku in haikus:
+            print haiku.key
+            comments = Comment.query().fetch()
+            print comments
         self.response.write(haiku_page.render(
             haikus=haikus,
-            signedin_username=signedin_username))
+            signedin_username=signedin_username,
+            Comment=Comment))
 
 
 class NewEntryHandler(HaikurHandler):
@@ -351,6 +362,29 @@ class SingleHaikuHandler(HaikurHandler):
 
         single_haiku_page = jinja_env.get_template('permalink.html')
         self.response.write(single_haiku_page.render(haiku=haiku))
+
+
+class CommentHandler(HaikurHandler):
+    # def get(self, haiku_id):
+    #     comment_page = jinja_env.get_template('post_comment.html')
+    #     self.response.write(comment_page.render())
+
+    def post(self, haiku_id):
+        user_id = self.read_user_cookie()
+        signedin_username = self.get_username_by_cookie()
+        comment_text = self.request.get('commentText')
+        haiku_id = self.request.get('haikuID')
+        haiku_key = ndb.Key('Haiku', int(haiku_id))
+        print haiku_id
+
+        if comment_text:
+            comment = Comment(
+                haiku_ref=haiku_key,
+                user_key=User.get_by_id(int(user_id)).key,
+                username=signedin_username,
+                comment_text=comment_text
+                )
+            comment_key = comment.put()
 
 
 class SignupHandler(HaikurHandler):
@@ -430,5 +464,6 @@ app = webapp2.WSGIApplication([
     ('/signup', SignupHandler),
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
+    ('/(\w+)/comment', CommentHandler),
     ('/(\w+)', SingleHaikuHandler)
     ])
