@@ -1,0 +1,97 @@
+body {
+	background-color: #f43c50;
+	font-family: 'Catamaran', sans-serif;
+	color: white;
+}
+
+.container {
+	box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+	padding-top: 10px;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*HEADER*/
+
+header {
+	width: 100%;
+	box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 50px;
+}
+
+h1, h3 {
+	font-weight: 500;
+}
+
+.logo-box {
+	width: 75%;
+}
+
+.menu-box {
+	padding-top: 15px;
+	width: 25%;
+	text-align: right;
+}
+
+.menu-box>h3 {
+	margin-top: 0;
+}
+
+#pen-icon {
+	height: 35px;
+	width: auto;
+}
+
+/*CONTENT*/
+
+#content {
+	width: 100%;
+}
+
+.haiku-box {
+	width: 100%;
+	box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
+}
+
+.username-section {
+	font-weight: 500;
+	font-size: 14pt;
+	padding-top: 10px;
+	width: calc(15% - 40px);
+	text-align: right;
+	padding-right: 40px;
+}
+
+.haiku-section {
+	width: 65%;
+	font-size: 28pt;
+	font-weight: 900;
+}
+
+.comment-section {
+	width: 20%;
+}
+
+/*COMMENTS*/
+
+p {
+	margin: 0;
+}
+
+.comment-username {
+	font-weight: 900;
+}
+
+.comment-text {
+	font-weight: 500;
+	font-size: 10pt;
+}
+
