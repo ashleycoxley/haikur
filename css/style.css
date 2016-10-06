@@ -72,8 +72,33 @@ h1, h3 {
 
 .haiku-section {
 	width: 65%;
-	font-size: 28pt;
+}
+
+.haiku-container>p {
+	font-size: 32pt;
 	font-weight: 900;
+	line-height: 120%;
+}
+
+.vote-box {
+	width: 100%;
+	display: flex;
+    flex-wrap: wrap;
+}
+
+.vote-box>p {
+	font-weight: 500;
+	font-size: 14pt;
+	padding-top: 30px;
+	padding-left: 10px;
+	padding-right: 30px;
+}
+
+.vote-icon {
+	padding-top: 30px;
+	padding-right: 10px;
+	height: 25px;
+	width: auto;
 }
 
 .comment-section {
@@ -81,6 +106,23 @@ h1, h3 {
 }
 
 /*COMMENTS*/
+
+.comment-header {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.comment-header>p {
+	font-weight: 500;
+	font-size: 14pt;
+	padding-left: 10px;
+}
+
+#comment-icon {
+	padding-top: 9px;
+	height: 15px;
+	width: auto;
+}
 
 p {
 	margin: 0;
@@ -93,5 +135,9 @@ p {
 .comment-text {
 	font-weight: 500;
 	font-size: 10pt;
+}
+
+.hide {
+	display: none;
 }
 

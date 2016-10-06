@@ -7,20 +7,30 @@
 			<p>{{haiku.username}}</p>
 		</div>
 		<div class='haiku-section'>
-			<div class='haiku-box'>
+			<div class='haiku-container'>
 				<p>
 					{{haiku.stanza1}}<br>
 					{{haiku.stanza2}}<br>
 					{{haiku.stanza3}}<br>
 				</p>
 			</div>
+			<div class='vote-box'>
+				<a href='/upvote'>
+					<img src='/assets/up.png' class='vote-icon'>
+				</a>
+				<p>{{upvote_count}}12</p>
+				<a href='/downvote'>
+					<img src='/assets/down.png' class='vote-icon'>
+				</a>
+				<p>{{downvote_count}}4</p>
+			</div>
 		</div>
 		<div class='comment-section'>
 			<div class='comment-header'>
-				<a href='/showcomments'
-					<img src='http://placehold.it/30x30'>
+				<a href='/showcomments'>
+					<img src='/assets/comments.png' id='comment-icon'>
 				</a>
-				<!-- {{comment_count}} -->
+				<p>{{comment_count}}3</p>
 			</div>
 			<div class='comment-box hide'>
 				<div class='comment-list'>
