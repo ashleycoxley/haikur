@@ -3,7 +3,8 @@
 <head>
 	<title>HAIKUr</title>
 	<link rel="stylesheet" href="/css/style.css">
-	<script   src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:500,900" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src='/js/comment.js'></script>
 </head>
 <body>
@@ -14,10 +15,10 @@
 				<!-- LOGO HERE -->
 			</div>
 			<div class='menu-box'>
-				<h3>{{signedin_username}}<h3>
 				<form id='add_new_button' action="/newpost">
-    			<input type="submit" value="Add a new post"/>
-			</form>
+					<img src='/assets/pen.png' id='pen-icon'>
+				</form>
+				<h3>{{signedin_username}}<h3>
 			</div>
 		</header>
 		<section id='content'>

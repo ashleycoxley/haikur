@@ -2,7 +2,7 @@
 
 {% block content %}
 	{% for haiku in haikus: %}
-	<div class='haiku box'>
+	<div class='haiku-box'>
 		<div class='username-section'>
 			<p>{{haiku.username}}</p>
 		</div>
@@ -27,8 +27,8 @@
 					{% set comments = Comment.query(Comment.haiku_ref==haiku.key).fetch() %}
 					{% for comment in comments: %}
 					<div class='comment-box'>
-						<p>{{comment.username}}</p>
-						<p>{{comment.comment_text}}</p>
+						<p class='comment-username'>{{comment.username}}</p>
+						<p class='comment-text'>{{comment.comment_text}}</p>
 					</div>
 					{% endfor %}
 				</div>
