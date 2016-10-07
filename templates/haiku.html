@@ -27,16 +27,16 @@
 		</div>
 		<div class='comment-section'>
 			<div class='comment-header'>
-				<a href='/showcomments'>
-					<img src='/assets/comments.png' id='comment-icon'>
-				</a>
+				<!-- <a href='#showcomments'> -->
+					<img src='/assets/comments.png' class='comment-icon'>
+				<!-- </a> -->
 				<p>{{comment_count}}3</p>
 			</div>
 			<div class='comment-box hide'>
 				<div class='comment-list'>
 					{% set comments = Comment.query(Comment.haiku_ref==haiku.key).fetch() %}
 					{% for comment in comments: %}
-					<div class='comment-box'>
+					<div class='comment-container'>
 						<p class='comment-username'>{{comment.username}}</p>
 						<p class='comment-text'>{{comment.comment_text}}</p>
 					</div>
