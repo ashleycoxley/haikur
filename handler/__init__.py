@@ -5,4 +5,5 @@ from comment import CommentHandler
 from signup import SignupHandler
 from login import LoginHandler
 from logout import LogoutHandler
+from vote import VoteHandler
 from handler_helper import HaikurHandler

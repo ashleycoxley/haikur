@@ -1,3 +1,5 @@
+// COMMENTS
+
 var commentTemplate = "<div class='comment-box'><p>username</p><p>comment_text</p></div>"
 
 function buildComment(commentTemplate, username, commentText) {
@@ -7,9 +9,15 @@ function buildComment(commentTemplate, username, commentText) {
 	return newComment
 };
 
-$(document).ready(function() {
+
+// VOTES
+
+
+
+
+$(document).ready(function(e) {
 	$('.comment-form').on('submit', function(event) {
-		event.preventDefault();
+		e.preventDefault();
 
 		var commentText = $(this).find('.new-comment-text').val();
 		var haikuID = $(this).parent().attr('data-haikuid');
@@ -34,7 +42,38 @@ $(document).ready(function() {
 
 	$('.comment-icon').on('click', function(e){
   		e.preventDefault();
+  		console.log('hey girl');
   		$(this).parent().siblings('.comment-box').toggleClass('hide');
 	});
+
+	$('.vote-icon').on('click', function(e) {
+		e.preventDefault();
+		var voteInstance = $(this)
+		var haikuID = voteInstance.parent().parent().attr('data-haikuid');
+		var voteType = voteInstance.attr('id');
+		var voteUrl = '/' + haikuID + '/vote';
+
+		if (voteType == 'upvote') {
+			var voteType = 'upvote';
+		} else if (voteType == 'downvote') {
+			var voteType = 'downvote';
+		}
+
+		var data = {
+			'haikuID': haikuID,
+			'voteType': voteType
+		};
+
+		var votePost = $.post(voteUrl, data, function(response) {
+			return;
+			// var status = response.status
+			// if (status == 'success') {
+			// 	var voteObject = voteInstance.parent().siblings('.vote-count')
+			// 	var voteCount = parseInt(voteObject.val());
+			// 	voteCount += 1;
+			// 	voteObject.val(voteCount.toString());
+		});
+		
+ 	});
 });
 

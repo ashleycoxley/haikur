@@ -14,27 +14,40 @@
 					{{haiku.stanza3}}<br>
 				</p>
 			</div>
-			<div class='vote-box'>
+			<div class='vote-box' data-haikuid='{{haiku.key.id()|string}}'>
 				<a href='/upvote'>
-					<img src='/assets/up.png' class='vote-icon'>
+					<img src='/assets/upvote.png' class='vote-icon' id='upvote'>
+					<img src='/assets/upvote_selected.png' class='vote-icon hide' id='upvote'>
 				</a>
-				<p>{{upvote_count}}12</p>
+				{% set upvotes = haiku.upvotes %}
+				{% if upvotes == 0 %}
+					{% set upvotes = '' %}
+				{% endif %}
+				{% set downvotes = haiku.downvotes %}
+				{% if downvotes == 0 %}
+					{% set downvotes = '' %}
+				{% endif %}
+				<p class='vote-count' id='upvote-count'>{{upvotes}}</p>
 				<a href='/downvote'>
-					<img src='/assets/down.png' class='vote-icon'>
+					<img src='/assets/downvote.png' class='vote-icon' id='downvote'>
+					<img src='/assets/downvote_selected.png' class='vote-icon hide' id='downvote'>
 				</a>
-				<p>{{downvote_count}}4</p>
+				<p class='vote-count' id='downvote-count'>{{downvotes}}</p>
 			</div>
 		</div>
 		<div class='comment-section'>
 			<div class='comment-header'>
-				<!-- <a href='#showcomments'> -->
-					<img src='/assets/comments.png' class='comment-icon'>
-				<!-- </a> -->
-				<p>{{comment_count}}3</p>
+				<input type='image' class='comment-icon' src='/assets/comments.png'>
+				{% set comment_query = Comment.query(Comment.haiku_ref==haiku.key) %}
+				{% set comment_count = comment_query.count() %}
+				{% if comment_count == 0 %}
+					{% set comment_count = '' %}
+				{% endif %}
+				<p>{{comment_count}}</p>
 			</div>
 			<div class='comment-box hide'>
 				<div class='comment-list'>
-					{% set comments = Comment.query(Comment.haiku_ref==haiku.key).fetch() %}
+					{% set comments = comment_query.fetch() %}
 					{% for comment in comments: %}
 					<div class='comment-container'>
 						<p class='comment-username'>{{comment.username}}</p>
