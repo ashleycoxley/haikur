@@ -116,5 +116,14 @@ $(document).ready(function(e) {
 		});
 		
  	});
+
+	$('.color-option').on('click', function(e) {
+		var buttonColor = $(this).css('background');
+		console.log(buttonColor);
+		$('body').css('background', buttonColor);
+		$('.button').css('background', buttonColor);
+		// $('input').css('background', buttonColor);
+	});
+
 });
 

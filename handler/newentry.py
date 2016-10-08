@@ -1,6 +1,6 @@
 from handler_helper import HaikurHandler
 import model
-from helper.global_vars import JINJA_ENV
+from helper.global_vars import *
 
 from google.appengine.ext import ndb
 

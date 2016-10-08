@@ -2,28 +2,37 @@
 
 {% block content %}
 	<form class='entry-form' method='post'>
-		<div class='entry-form-box'
-			<div class = 'haiku-entry-row'>
-				<label for='stanza1'>5 SYLLABLES</label>
-				<input type='text' name='stanza1' value='{{stanza1}}'>
+		<div class='entry-form-box'>
+			<div class='haiku-entry-row'>
+				<input type='text' name='stanza1' class='haiku-input five-syllable' value='{{stanza1}}' placeholder='5 SYLLABLES'>
 				{{stanza1_error}}
 			</div>
-			<div class = 'haiku-entry-row'>
-				<label for='stanza2'>7 SYLLABLES</label>
-				<input type='text' name='stanza2' value='{{stanza2}}'>
+			<div class='haiku-entry-row'>
+				<input type='text' name='stanza2' class='haiku-input seven-syllable' value='{{stanza2}}' placeholder='7 SYLLABLES'>
 				{{stanza2_error}}
 			</div>
-			<div class = 'haiku-entry-row'>
-				<label for='stanza3'>5 SYLLABLES</label>
-				<input type='text' name='stanza3' value='{{stanza3}}'>
+			<div class='haiku-entry-row'>
+				<input type='text' name='stanza3' class='haiku-input five-syllable' value='{{stanza3}}' placeholder='5 SYLLABLES'>
 				{{stanza3_error}}
 			</div>
 		</div>
 		<div class='form-footer'>
 			<div class='color-choice'>
+				<div class='color-option' id='color-red'>
+				</div>
+				<div class='color-option' id='color-blue'>
+				</div>
+				<div class='color-option' id='color-green'>
+				</div>
+				<div class='color-option' id='color-pink'>
+				</div>
+				<div class='color-option' id='color-yellow'>
+				</div>
+				<div class='color-option' id='color-black'>
+				</div>
 			</div>
 			<div class='button-box'>
-				<input type='submit' value='POST'>
+				<input type='submit' value='POST' class='button'>
 			</div>
 		</div>
 	</form>
