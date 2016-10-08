@@ -10,6 +10,15 @@ function buildComment(commentTemplate, username, commentText) {
 };
 
 
+var accentColors = {
+	'#f43c50': '#e03b55',
+	'#3bb3e8': '#2b85ae',
+	'#53de8a': '#3da567',
+	'#e046f1': '#c93fda',
+	'#f3dc4c': '#cdb942',
+	'#282828': '#7b7b7b',
+}
+
 // VOTES
 
 
@@ -117,13 +126,15 @@ $(document).ready(function(e) {
 		
  	});
 
-	$('.color-option').on('click', function(e) {
-		var buttonColor = $(this).css('background');
-		console.log(buttonColor);
-		$('body').css('background', buttonColor);
-		$('.button').css('background', buttonColor);
-		// $('input').css('background', buttonColor);
+	$('input[type="radio"]').on('click', function(e) {
+		var mainColor = $(this).parent().data('color');
+		var accentColor = accentColors[mainColor];
+		$(this).addClass('selected').siblings().removeClass('selected');
+		$('body').css('background', mainColor);
+		$('input').css('background', accentColor);
+		$('.color-option').css('z-index', 1000);
+		$('.button').css('background', mainColor);
+		$('.button').css('color', 'white');
 	});
-
 });
 

@@ -10,8 +10,9 @@ class HaikurHandler(webapp2.RequestHandler):
 
     def read_user_cookie(self):
         cookie_hash = self.request.cookies.get('user_id')
-        user_id = user_validation.validate_cookie(cookie_hash)
-        return user_id
+        if cookie_hash:
+            user_id = user_validation.validate_cookie(cookie_hash)
+            return user_id
 
     def remove_user_cookie(self):
         self.response.headers.add_header(

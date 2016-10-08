@@ -187,28 +187,28 @@ p {
 }
 
 ::-webkit-input-placeholder {
-   color: #f43c50;
+   color: #d1d1d1;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #f43c50;
+   color: #d1d1d1;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #f43c50;
+   color: #d1d1d1;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
 }
 
 :-ms-input-placeholder {  
-   color: #f43c50;
+   color: #d1d1d1;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
@@ -225,14 +225,25 @@ p {
 	margin-top: 15px;
 }
 
+input[type="radio"]{
+    visibility:hidden;
+	outline: none;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+}
+
+
+
 .color-option {
 	border: 4px solid;
 	border-radius: 50%;
-	border-color: #e03b55;
+	border-color: #7f7f7f;
 	width: 20px;
 	height: 20px;
 	margin-right: 10px;
 	margin-left: 10px;
+	z-index: 1000;
 }
 
 #color-red {

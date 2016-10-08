@@ -58,6 +58,7 @@ class NewEntryHandler(HaikurHandler):
         stanza1 = self.request.get('stanza1')
         stanza2 = self.request.get('stanza2')
         stanza3 = self.request.get('stanza3')
+        color = self.request.get('haiku-color')
 
         form_valid, template_values = validate_haiku([
             stanza1,
@@ -72,6 +73,7 @@ class NewEntryHandler(HaikurHandler):
                 stanza1=stanza1,
                 stanza2=stanza2,
                 stanza3=stanza3,
+                color=color
                 )
             haiku_key = haiku.put()
             haiku_id = str(haiku_key.id())
