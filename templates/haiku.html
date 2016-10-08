@@ -14,25 +14,33 @@
 					{{haiku.stanza3}}<br>
 				</p>
 			</div>
-			<div class='vote-box' data-haikuid='{{haiku.key.id()|string}}'>
-				<a href='/upvote'>
-					<img src='/assets/upvote.png' class='vote-icon' id='upvote'>
-					<img src='/assets/upvote_selected.png' class='vote-icon hide' id='upvote'>
-				</a>
-				{% set upvotes = haiku.upvotes %}
-				{% if upvotes == 0 %}
-					{% set upvotes = '' %}
-				{% endif %}
-				{% set downvotes = haiku.downvotes %}
-				{% if downvotes == 0 %}
-					{% set downvotes = '' %}
-				{% endif %}
-				<p class='vote-count' id='upvote-count'>{{upvotes}}</p>
-				<a href='/downvote'>
-					<img src='/assets/downvote.png' class='vote-icon' id='downvote'>
-					<img src='/assets/downvote_selected.png' class='vote-icon hide' id='downvote'>
-				</a>
-				<p class='vote-count' id='downvote-count'>{{downvotes}}</p>
+			<div class='vote-section' data-haikuid='{{haiku.key.id()|string}}'>
+				<div class='vote-box' id='upvote-box'>
+					{% if signedin_username in haiku.upvote_usernames %}
+						{% set upvote_img = '/assets/upvote_selected.png' %}
+					{% else %}
+						{% set upvote_img = '/assets/upvote.png' %}
+					{% endif %}
+					<input type='image' src='{{upvote_img}}' class='vote-icon' id='upvote'>
+					{% set upvotes = haiku.upvotes %}
+					{% if upvotes == 0 %}
+						{% set upvotes = '' %}
+					{% endif %}
+					{% set downvotes = haiku.downvotes %}
+					{% if downvotes == 0 %}
+						{% set downvotes = '' %}
+					{% endif %}
+					<p class='vote-count' id='upvote-count'>{{upvotes}}</p>
+				</div>
+				<div class='vote-box' id='downvote-box'>
+					{% if signedin_username in haiku.downvote_usernames %}
+						{% set downvote_img = '/assets/downvote_selected.png'%}
+					{% else %}
+						{% set downvote_img = '/assets/downvote.png' %}
+					{% endif %}
+					<input type='image' src='{{downvote_img}}' class='vote-icon' id	='downvote'>
+					<p class='vote-count' id='downvote-count'>{{downvotes}}</p>
+				</div>
 			</div>
 		</div>
 		<div class='comment-section'>

@@ -14,7 +14,6 @@ function buildComment(commentTemplate, username, commentText) {
 
 
 
-
 $(document).ready(function(e) {
 	$('.comment-form').on('submit', function(event) {
 		e.preventDefault();
@@ -65,13 +64,55 @@ $(document).ready(function(e) {
 		};
 
 		var votePost = $.post(voteUrl, data, function(response) {
-			return;
-			// var status = response.status
-			// if (status == 'success') {
-			// 	var voteObject = voteInstance.parent().siblings('.vote-count')
-			// 	var voteCount = parseInt(voteObject.val());
-			// 	voteCount += 1;
-			// 	voteObject.val(voteCount.toString());
+			console.log(response)
+			console.log(JSON.parse(response).change)
+			response = JSON.parse(response)
+			if (response.change == 'current_increment') {
+				var currentSrc = voteInstance.attr('src').slice(0, -4)
+				voteInstance.attr('src', currentSrc + '_selected.png')
+				var currentVoteCount = voteInstance.siblings('.vote-count').text()
+				if (currentVoteCount == '') {
+					var newVoteCount = 1
+				} else {
+					newVoteCount = parseInt(currentVoteCount) + 1
+				}
+				voteInstance.siblings('.vote-count').text(newVoteCount)
+
+			} else if (response.change == 'current_decrement') {
+				var currentSrc = voteInstance.attr('src').slice(0, -13)
+				voteInstance.attr('src', currentSrc + '.png')
+				var currentVoteCount = voteInstance.siblings('.vote-count').text()
+				if (currentVoteCount == '1') {
+					var newVoteCount = ''
+				} else {
+					newVoteCount = parseInt(currentVoteCount) - 1
+				}
+				voteInstance.siblings('.vote-count').text(newVoteCount)
+
+			} else if (response.change == 'switch') {
+				var currentSrc = voteInstance.attr('src').slice(0, -4)
+				voteInstance.attr('src', currentSrc + '_selected.png')
+				var currentVoteCount = voteInstance.siblings('.vote-count').text()
+				if (currentVoteCount == '') {
+					var newVoteCount = 1
+				} else {
+					newVoteCount = parseInt(currentVoteCount) + 1
+				}
+				voteInstance.siblings('.vote-count').text(newVoteCount)
+
+				otherInstance = voteInstance.parent().siblings('.vote-box').children('.vote-icon')
+				var otherSrc = otherInstance.attr('src').slice(0, -13)
+				otherInstance.attr('src', otherSrc + '.png')
+				var otherVoteCount = otherInstance.siblings('.vote-count').text()
+				console.log(otherVoteCount)
+				if (otherVoteCount == '1') {
+					var newOtherVoteCount = ''
+				} else {
+					newOtherVoteCount = parseInt(otherVoteCount) - 1
+				}
+				console.log(newOtherVoteCount)
+				otherInstance.siblings('.vote-count').text(newOtherVoteCount)
+			}
 		});
 		
  	});

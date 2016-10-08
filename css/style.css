@@ -80,13 +80,13 @@ h1, h3 {
 	line-height: 120%;
 }
 
-.vote-box {
+.vote-section {
 	width: 100%;
 	display: flex;
     flex-wrap: wrap;
 }
 
-.vote-box>p {
+.vote-count {
 	font-weight: 500;
 	font-size: 14pt;
 	padding-top: 30px;
@@ -94,11 +94,17 @@ h1, h3 {
 	padding-right: 30px;
 }
 
+.vote-box {
+	display: flex;
+    flex-wrap: wrap;
+}
+
 .vote-icon {
 	padding-top: 30px;
 	padding-right: 10px;
 	height: 25px;
 	width: auto;
+	outline: none;
 }
 
 .comment-section {
@@ -122,6 +128,7 @@ h1, h3 {
 	padding-top: 9px;
 	height: 15px;
 	width: auto;
+	outline: none;
 }
 
 p {

@@ -1,6 +1,7 @@
 from handler_helper import HaikurHandler
 import model
 from google.appengine.ext import ndb
+import json
 
 
 def change_vote(haiku, signedin_username, vote_type, increment_or_decrement):
@@ -33,8 +34,6 @@ class VoteHandler(HaikurHandler):
         haiku_id = self.request.get('haikuID')
         vote_type = self.request.get('voteType')
         haiku_key = ndb.Key('Haiku', int(haiku_id))
-        print "haiku_id:", haiku_id
-        print "vote_type:", vote_type
 
         haiku = haiku_key.get()
         upvoters = haiku.upvote_usernames
@@ -48,12 +47,15 @@ class VoteHandler(HaikurHandler):
         if signedin_username in voters:
             if previous_vote_type == vote_type:
                 change_vote(haiku, signedin_username, vote_type, 'decrement')
-                # self.write(json.dumps({'error': error}))
+                vote_response = {'change': 'current_decrement'}
+                self.response.write(json.dumps(vote_response))
             else:
                 switch_vote(haiku, signedin_username, vote_type, previous_vote_type)
-                # self.write(json.dumps({'error': error}))
+                vote_response = {'change': 'switch'}
+                self.response.write(json.dumps(vote_response))
         else:
             change_vote(haiku, signedin_username, vote_type, 'increment')
-            # self.write(json.dumps({'error': error}))
+            vote_response = {'change': 'current_increment'}
+            self.response.write(json.dumps(vote_response))
 
 
