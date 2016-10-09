@@ -24,8 +24,18 @@ var accentColors = {
 
 
 $(document).ready(function(e) {
-	$('.comment-form').on('submit', function(event) {
+
+	$('.comment-icon').on('click', function(e){
+  		e.preventDefault();
+  		console.log('hey girl');
+  		$(this).parent().siblings('.comment-box').toggleClass('hide');
+	});
+
+
+
+	$('.comment-form').on('submit', function(e) {
 		e.preventDefault();
+		console.log('submit fired')
 
 		var commentText = $(this).find('.new-comment-text').val();
 		var haikuID = $(this).parent().attr('data-haikuid');
@@ -48,11 +58,7 @@ $(document).ready(function(e) {
 		});	
 	});
 
-	$('.comment-icon').on('click', function(e){
-  		e.preventDefault();
-  		console.log('hey girl');
-  		$(this).parent().siblings('.comment-box').toggleClass('hide');
-	});
+
 
 	$('.vote-icon').on('click', function(e) {
 		e.preventDefault();
@@ -126,10 +132,12 @@ $(document).ready(function(e) {
 		
  	});
 
+
+
 	$('input[type="radio"]').on('click', function(e) {
 		var mainColor = $(this).parent().data('color');
 		var accentColor = accentColors[mainColor];
-		$(this).addClass('selected').siblings().removeClass('selected');
+		// $(this).addClass('selected').siblings().removeClass('selected');
 		$('body').css('background', mainColor);
 		$('input').css('background', accentColor);
 		$('.color-option').css('z-index', 1000);
