@@ -2,6 +2,8 @@ body {
 	background-color: #f43c50;
 	font-family: 'Catamaran', sans-serif;
 	color: white;
+	margin: 0;
+	padding: 0;
 }
 
 .container {
@@ -18,6 +20,10 @@ input[type='text'], textarea {
 	background-color: #e03b55;
 	border: 0;
 }
+
+/*.color-box {
+	padd
+}*/
 
 
 /*HEADER*/
@@ -38,6 +44,12 @@ h1, h3 {
 	width: 75%;
 }
 
+.logo-box>a {
+	font-family: 'Catamaran', sans-serif;
+	color: white;
+	text-decoration: none;
+}
+
 .menu-box {
 	padding-top: 15px;
 	width: 25%;
@@ -55,16 +67,17 @@ h1, h3 {
 
 /*CONTENT*/
 
-#content {
+/*#content {
 	width: 100%;
-}
+}*/
 
 .haiku-box {
 	width: 100%;
 	box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    height: 400px;
+    height: 500px;
+    padding-top: 100px;
 }
 
 .username-section {
@@ -156,8 +169,8 @@ p {
 }
 
 .button-box>input {
-	background-color: #f43c50;
-	border: none;
+/*	background-color: #f43c50;
+*/	border: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
 	font-size: 12pt;
@@ -252,27 +265,27 @@ input[type="radio"]{
 	z-index: 1000;
 }
 
-#color-red {
+.red {
 	background-color: #f43c50;
 }
 
-#color-blue {
+.blue {
 	background-color: #3bb3e8;
 }
 
-#color-green {
+.green {
 	background-color: #53de8a;
 }
 
-#color-pink {
+.pink {
 	background-color: #e046f1;
 }
 
-#color-yellow {
+.yellow {
 	background-color: #f3dc4c;
 }
 
-#color-black {
+.black {
 	background-color: #282828;
 }
 

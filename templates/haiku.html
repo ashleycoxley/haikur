@@ -2,78 +2,82 @@
 
 {% block content %}
 	{% for haiku in haikus: %}
-	<div class='haiku-box'>
-		<div class='username-section'>
-			<p>{{haiku.username}}</p>
-		</div>
-		<div class='haiku-section'>
-			<div class='haiku-container'>
-				<p>
-					{{haiku.stanza1}}<br>
-					{{haiku.stanza2}}<br>
-					{{haiku.stanza3}}<br>
-				</p>
-			</div>
-			<div class='vote-section' data-haikuid='{{haiku.key.id()|string}}'>
-				<div class='vote-box' id='upvote-box'>
-					{% if signedin_username in haiku.upvote_usernames %}
-						{% set upvote_img = '/assets/upvote_selected.png' %}
-					{% else %}
-						{% set upvote_img = '/assets/upvote.png' %}
-					{% endif %}
-					<input type='image' src='{{upvote_img}}' class='vote-icon' id='upvote'>
-					{% set upvotes = haiku.upvotes %}
-					{% if upvotes == 0 %}
-						{% set upvotes = '' %}
-					{% endif %}
-					{% set downvotes = haiku.downvotes %}
-					{% if downvotes == 0 %}
-						{% set downvotes = '' %}
-					{% endif %}
-					<p class='vote-count' id='upvote-count'>{{upvotes}}</p>
+	<div class='color-box {{haiku.color}}'>
+		<div class='container'>
+			<div class='haiku-box'>
+				<div class='username-section'>
+					<p>{{haiku.username}}</p>
 				</div>
-				<div class='vote-box' id='downvote-box'>
-					{% if signedin_username in haiku.downvote_usernames %}
-						{% set downvote_img = '/assets/downvote_selected.png'%}
-					{% else %}
-						{% set downvote_img = '/assets/downvote.png' %}
-					{% endif %}
-					<input type='image' src='{{downvote_img}}' class='vote-icon' id	='downvote'>
-					<p class='vote-count' id='downvote-count'>{{downvotes}}</p>
-				</div>
-			</div>
-		</div>
-		<div class='comment-section'>
-			<div class='comment-header'>
-				<input type='image' class='comment-icon' src='/assets/comments.png'>
-				{% set comment_query = Comment.query(Comment.haiku_ref==haiku.key) %}
-				{% set comment_count = comment_query.count() %}
-				{% if comment_count == 0 %}
-					{% set comment_count = '' %}
-				{% endif %}
-				<p>{{comment_count}}</p>
-			</div>
-			<div class='comment-box hide'>
-				<div class='comment-list'>
-					{% set comments = comment_query.fetch() %}
-					{% for comment in comments: %}
-					<div class='comment-container'>
-						<p class='comment-username'>{{comment.username}}</p>
-						<p class='comment-text'>{{comment.comment_text}}</p>
+				<div class='haiku-section'>
+					<div class='haiku-container'>
+						<p>
+							{{haiku.stanza1}}<br>
+							{{haiku.stanza2}}<br>
+							{{haiku.stanza3}}<br>
+						</p>
 					</div>
-					{% endfor %}
+					<div class='vote-section' data-haikuid='{{haiku.key.id()|string}}'>
+						<div class='vote-box' id='upvote-box'>
+							{% if signedin_username in haiku.upvote_usernames %}
+								{% set upvote_img = '/assets/upvote_selected.png' 	%}
+							{% else %}
+								{% set upvote_img = '/assets/upvote.png' %}
+							{% endif %}
+							<input type='image' src='{{upvote_img}}' class='vote-icon' id='upvote'>
+							{% set upvotes = haiku.upvotes %}
+							{% if upvotes == 0 %}
+								{% set upvotes = '' %}
+							{% endif %}
+							<p class='vote-count' id='upvote-count'>{{upvotes}}</p>
+						</div>
+						<div class='vote-box' id='downvote-box'>
+							{% if signedin_username in haiku.downvote_usernames %}
+								{% set downvote_img = '/assets/downvote_selected.png'%}
+							{% else %}
+								{% set downvote_img = '/assets/downvote.png' %}
+							{% endif %}
+							<input type='image' src='{{downvote_img}}' class='vote-icon' id='downvote'>
+							{% set downvotes = haiku.downvotes %}
+							{% if downvotes == 0 %}
+								{% set downvotes = '' %}
+							{% endif %}
+							<p class='vote-count' id='downvote-count'>{{downvotes}}</p>
+						</div>
+					</div>
 				</div>
-				<div class='comment-add' data-haikuid='{{haiku.key.id()|string}}'>
-					<form class='comment-form' method='post'>
-						<div class='comment-form-box'>
-							<textarea class='new-comment-text' name='comment_text'></textarea>
-						</div>
-						<div class='form-footer'>
-							<div class='button-box'>
-								<input type='submit' value='POST COMMENT'>
+				<div class='comment-section'>
+					<div class='comment-header'>
+						<input type='image' class='comment-icon' src='/assets/comments.png'>
+						{% set comment_query = Comment.query(Comment.haiku_ref==haiku.key) %}
+						{% set comment_count = comment_query.count() %}
+						{% if comment_count == 0 %}
+							{% set comment_count = '' %}
+						{% endif %}
+						<p>{{comment_count}}</p>
+					</div>
+					<div class='comment-box hide'>
+						<div class='comment-list'>
+							{% set comments = comment_query.fetch() %}
+							{% for comment in comments: %}
+							<div class='comment-container'>
+								<p class='comment-username'>{{comment.username}}</p>
+								<p class='comment-text'>{{comment.comment_text}}</p>
 							</div>
+							{% endfor %}
 						</div>
-					</form>
+						<div class='comment-add' data-haikuid='{{haiku.key.id()|string}}'>
+							<form class='comment-form' method='post'>
+								<div class='comment-form-box'>
+									<textarea class='new-comment-text {{haiku.color}}' name='comment_text'></textarea>
+								</div>
+								<div class='form-footer'>
+									<div class='button-box'>
+										<input type='submit' value='POST COMMENT' class='{{haiku.color}}'>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

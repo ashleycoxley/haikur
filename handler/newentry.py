@@ -46,7 +46,8 @@ class NewEntryHandler(HaikurHandler):
         if signedin_username:
             entry_form = JINJA_ENV.get_template('newentry.html')
             self.response.write(entry_form.render(
-                signedin_username=signedin_username))
+                signedin_username=signedin_username,
+                header_color='red'))
         else:
             self.redirect('/login')
 

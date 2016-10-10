@@ -27,7 +27,6 @@ $(document).ready(function(e) {
 
 	$('.comment-icon').on('click', function(e){
   		e.preventDefault();
-  		console.log('hey girl');
   		$(this).parent().siblings('.comment-box').toggleClass('hide');
 	});
 
@@ -35,7 +34,6 @@ $(document).ready(function(e) {
 
 	$('.comment-form').on('submit', function(e) {
 		e.preventDefault();
-		console.log('submit fired')
 
 		var commentText = $(this).find('.new-comment-text').val();
 		var haikuID = $(this).parent().attr('data-haikuid');
@@ -86,11 +84,13 @@ $(document).ready(function(e) {
 				var currentSrc = voteInstance.attr('src').slice(0, -4)
 				voteInstance.attr('src', currentSrc + '_selected.png')
 				var currentVoteCount = voteInstance.siblings('.vote-count').text()
+				console.log('current vote count:', currentVoteCount)
 				if (currentVoteCount == '') {
 					var newVoteCount = 1
 				} else {
 					newVoteCount = parseInt(currentVoteCount) + 1
 				}
+				console.log('new vote count:', newVoteCount)
 				voteInstance.siblings('.vote-count').text(newVoteCount)
 
 			} else if (response.change == 'current_decrement') {
@@ -137,10 +137,9 @@ $(document).ready(function(e) {
 	$('input[type="radio"]').on('click', function(e) {
 		var mainColor = $(this).parent().data('color');
 		var accentColor = accentColors[mainColor];
-		// $(this).addClass('selected').siblings().removeClass('selected');
 		$('body').css('background', mainColor);
+		$('.color-box').css('background', mainColor);
 		$('input').css('background', accentColor);
-		$('.color-option').css('z-index', 1000);
 		$('.button').css('background', mainColor);
 		$('.button').css('color', 'white');
 	});

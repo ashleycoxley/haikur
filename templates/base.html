@@ -8,23 +8,25 @@
 	<script type="text/javascript" src='/js/comment.js'></script>
 </head>
 <body>
-	<div class='container'>
-		<header>
-			<div class='logo-box'>
-				<h1>HAIKUr</h1>
-				<!-- LOGO HERE -->
-			</div>
-			<div class='menu-box'>
-				<a id='add_new_button' href="/newpost">
-					<img src='/assets/pen.png' id='pen-icon'>
-				</a>
-				<h3>{{signedin_username}}<h3>
-			</div>
-		</header>
-		<section id='content'>
-			{% block content %}
-			{% endblock %}
-		</section>
+	<div class='color-box {{header_color}}'>
+		<div class='container'>
+			<header>
+				<div class='logo-box'>
+					<a href='/'>
+						<h1>HAIKUr</h1>
+						<!-- LOGO HERE -->
+					</a>
+				</div>
+				<div class='menu-box'>
+					<a id='add_new_button' href="/newpost">
+						<img src='/assets/pen.png' id='pen-icon'>
+					</a>
+					<h3>{{signedin_username}}</h3>
+				</div>
+			</header>
+		</div>
 	</div>
+	{% block content %}
+	{% endblock %}
 </body>
 </html>
