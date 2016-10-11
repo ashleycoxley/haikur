@@ -1,5 +1,5 @@
 body {
-	background-color: #f43c50;
+	background-color: #f24962;
 	font-family: 'Catamaran', sans-serif;
 	color: white;
 	margin: 0;
@@ -299,23 +299,23 @@ input[type="radio"]{
 }
 
 .red {
-	background-color: #f43c50;
+	background-color: #f24962;
 }
 
 .blue {
-	background-color: #3bb3e8;
+	background-color: #44bfea;
 }
 
 .green {
-	background-color: #53de8a;
+	background-color: #61e296;
 }
 
 .pink {
-	background-color: #e046f1;
+	background-color: #da65ef;
 }
 
 .yellow {
-	background-color: #f3dc4c;
+	background-color: #f4e067;
 }
 
 .black {
@@ -329,7 +329,7 @@ input[type="radio"]{
 }
 
 .button {
-	background-color: #f43c50;
+	background-color: #f24962;
 	border: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;

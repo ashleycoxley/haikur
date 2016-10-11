@@ -11,13 +11,32 @@ function buildComment(commentTemplate, username, commentText) {
 
 
 var accentColors = {
-	'#f43c50': '#e03b55',
-	'#3bb3e8': '#2b85ae',
-	'#53de8a': '#3da567',
-	'#e046f1': '#c93fda',
-	'#f3dc4c': '#cdb942',
+	'#f24962': '#e03b55',
+	'#44bfea': '#2b85ae',
+	'#61e296': '#3da567',
+	'#da65ef': '#c93fda',
+	'#f4e067': '#cdb942',
 	'#282828': '#7b7b7b',
 }
+
+
+function getSelfUsername() {
+	return $.trim($('.menu-box h3').text());
+}
+
+function voterInvalid(voteInstance) {
+	var selfUsername = getSelfUsername();
+	var haikuUsername = voteInstance
+		.parent()
+		.parent()
+		.parent()
+		.siblings('.username-section')
+		.find('p')
+		.text();
+	if (selfUsername == haikuUsername) {
+		return true;
+	}
+};
 
 // VOTES
 
@@ -37,7 +56,7 @@ $(document).ready(function(e) {
 
 		var commentText = $(this).find('.new-comment-text').val();
 		var haikuID = $(this).parent().attr('data-haikuid');
-		var username = $('.menu-box h3').text();
+		var username = getSelfUsername();
 
 		var data = {
 			'commentText': commentText,
@@ -61,6 +80,12 @@ $(document).ready(function(e) {
 	$('.vote-icon').on('click', function(e) {
 		e.preventDefault();
 		var voteInstance = $(this)
+
+		// Check that voter is not author of haiku
+		if (voterInvalid(voteInstance)) {
+			return;
+		}
+		
 		var haikuID = voteInstance.parent().parent().attr('data-haikuid');
 		var voteType = voteInstance.attr('id');
 		var voteUrl = '/' + haikuID + '/vote';

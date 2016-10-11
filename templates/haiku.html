@@ -72,6 +72,7 @@
 							</div>
 							{% endfor %}
 						</div>
+						{% if signedin_username != '' %}
 						<div class='comment-add' data-haikuid='{{haiku.key.id()|string}}'>
 							<form class='comment-form' method='post'>
 								<div class='comment-form-box'>
@@ -84,6 +85,11 @@
 								</div>
 							</form>
 						</div>
+						{% else %}
+						<div>
+							<a href='/signin' class='user-prompt'>Sign in to comment or vote</a>
+						</div>
+						{% endif %}
 					</div>
 				</div>
 			</div>
