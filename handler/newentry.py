@@ -46,15 +46,14 @@ class NewEntryHandler(HaikurHandler):
         if signedin_username:
             entry_form = JINJA_ENV.get_template('newentry.html')
             self.response.write(entry_form.render(
-                signedin_username=signedin_username,
-                header_color='red'))
+                signedin_username=signedin_username))
         else:
-            self.redirect('/login')
+            self.redirect('/signin')
 
     def post(self):
         user_id = self.read_user_cookie()
         if not user_id:
-            self.redirect('/login')
+            self.redirect('/signin')
 
         stanza1 = self.request.get('stanza1')
         stanza2 = self.request.get('stanza2')

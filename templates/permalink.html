@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class='haiku-box'>
-		<div class='username-section'>
-			<p>{{haiku.username}}</p>
-		</div>
-		<div class='haiku-section'>
-			<div class='haiku-container'>
-				<p>
-					{{haiku.stanza1}}<br>
-					{{haiku.stanza2}}<br>
-					{{haiku.stanza3}}<br>
-				</p>
+	<div class='color-box {{haiku.color}}'>
+		<div class='haiku-box'>
+			<div class='username-section'>
+				<p>{{haiku.username}}</p>
+			</div>
+			<div class='haiku-section'>
+				<div class='haiku-container'>
+					<p>
+						{{haiku.stanza1}}<br>
+						{{haiku.stanza2}}<br>
+						{{haiku.stanza3}}<br>
+					</p>
+				</div>
+			</div>
+			<div class='permalink-footer'>
+				<a href="/" class='mainpage-link'>MAIN PAGE</a>
 			</div>
 		</div>
-	</div>
-	<div class='permalink-footer'>
-		<a href="/" class='mainpage-link'>Main page</a>
 	</div>
 {% endblock %}

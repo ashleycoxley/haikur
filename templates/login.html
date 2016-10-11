@@ -1,26 +1,32 @@
-{% extends "base.html" %}
+{% extends "base_userflow.html" %}
 
 {% block content %}
-	<form class='login-form' method='post'>
-		<div class='form-header'>
-			<h2>LOG IN</h2>
-		</div>
-		<div class='login-form-box'
-			<div class = 'signup-entry-row'>
-				<label for='username'>USERNAME</label>
-				<input type='text' name='username' value='{{username}}'>
-				{{username_error}}
+	<div class='container'>
+		<form class='signup-in-form' method='post'>
+			<div class='user-form-box'>
+				<div class='user-form-row'>
+					<label for='username'>USERNAME</label>
+					<input type='text' name='username' value='{{username}}' class='user-input'>
+					<p class='input-error'>
+						{{username_error}}
+					</p>
+				</div>
+				<div class='user-form-row'>
+					<label for='username'>PASSWORD</label>
+					<input type='password' name='password' class='user-input'>
+					<p class='input-error'>
+						{{password_error}}
+					</p>
+				</div>
 			</div>
-			<div class = 'signup-entry-row'>
-				<label for='password'>PASSWORD</label>
-				<input type='password' name='password'>
-				{{password_error}}
+			<div class='form-footer'>
+				<div class='button-box'>
+					<input type='submit' value='SIGN IN' class='button'>
+				</div>
+				<div class='signin-exchange'>
+					<a href='/signup' class='user-prompt'>Need to sign up?</a>
+				</div>
 			</div>
-		</div>
-		<div class='form-footer'>
-			<div class='button-box'>
-				<input type='submit' value='LOG IN'>
-			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 {% endblock %}

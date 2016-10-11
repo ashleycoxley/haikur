@@ -1,36 +1,39 @@
-{% extends "base.html" %}
+{% extends "base_userflow.html" %}
 
 {% block content %}
-	<form class='signup-form' method='post'>
-		<div class='form-header'>
-			<h2>SIGN UP TO START KUin'</h2>
-		</div>
-		<div class='signup-form-box'
-			<div class = 'signup-entry-row'>
-				<label for='username'>USERNAME</label>
-				<input type='text' name='username' value='{{username}}'>
-				{{username_error}}
+	<div class='container'>
+		<form class='signup-in-form' method='post'>
+			<div class='user-form-box'>
+				<div class='user-form-row'>
+					<label for='username'>USERNAME</label>
+					<input type='text' name='username' value='{{username}}' class='user-input'>
+					<p class='input-error'>
+						{{username_error}}
+					</p>
+				</div>
+				<div class='user-form-row'>
+					<label for='username'>PASSWORD</label>
+					<input type='password' name='password' class='user-input'>
+					<p class='input-error'>
+						{{password_error}}
+					</p>
+				</div>
+				<div class='user-form-row'>
+					<label for='username'>VERIFY PASSWORD</label>
+					<input type='password' name='verify' class='user-input'>
+					<p class='input-error'>
+						{{verify_error}}
+					</p>
+				</div>
 			</div>
-			<div class = 'signup-entry-row'>
-				<label for='password'>PASSWORD</label>
-				<input type='password' name='password'>
-				{{password_error}}
+			<div class='form-footer'>
+				<div class='button-box'>
+					<input type='submit' value='SIGN ME UP' class='button'>
+				</div>
+				<div class='signin-exchange'>
+					<a href='/signin' class='user-prompt'>Already signed up?</a>
+				</div>
 			</div>
-			<div class = 'signup-entry-row'>
-				<label for='verify'>VERIFY PASSWORD</label>
-				<input type='password' name='verify'>
-				{{verify_error}}
-			</div>
-			<div class = 'signup-entry-row'>
-				<label for='email'>EMAIL (optional)</label>
-				<input type='text' name='email' value='{{email}}'>
-				{{email_error}}
-			</div>
-		</div>
-		<div class='form-footer'>
-			<div class='button-box'>
-				<input type='submit' value='SIGN ME UP'>
-			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 {% endblock %}

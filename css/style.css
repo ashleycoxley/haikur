@@ -16,14 +16,18 @@ body {
 	margin-right: auto;
 }
 
-input[type='text'], textarea {
+input[type='text'], input[type='password'], textarea {
 	background-color: #e03b55;
 	border: 0;
 }
 
-/*.color-box {
-	padd
-}*/
+.user-prompt {
+	text-decoration: none;
+	color: white;
+	font-family: 'Catamaran', sans-serif;
+	font-size: 12pt;
+	outline: none;
+}
 
 
 /*HEADER*/
@@ -33,7 +37,6 @@ header {
 	box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 50px;
 }
 
 h1, h3 {
@@ -56,8 +59,8 @@ h1, h3 {
 	text-align: right;
 }
 
-.menu-box>h3 {
-	margin-top: 0;
+.header-username>h3 {
+	margin: 0;
 }
 
 #pen-icon {
@@ -65,18 +68,27 @@ h1, h3 {
 	width: auto;
 }
 
-/*CONTENT*/
+.header-username {
+    text-align: right;
+}
 
-/*#content {
-	width: 100%;
-}*/
+.fa  {
+	color: white;
+}
+
+.signin-header-box {
+	margin-top: 20px;
+}
+
+
+/*CONTENT*/
 
 .haiku-box {
 	width: 100%;
 	box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    height: 500px;
+    height: 470px;
     padding-top: 100px;
 }
 
@@ -169,11 +181,10 @@ p {
 }
 
 .button-box>input {
-/*	background-color: #f43c50;
-*/	border: none;
+	border: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
-	font-size: 12pt;
+	font-size: 14pt;
 	outline: none;
 }
 
@@ -189,6 +200,10 @@ p {
 
 
 /*ENTRY PAGE*/
+
+.entry-form {
+	margin: 40px;
+}
 
 .haiku-input {
 	font-size: 28pt;
@@ -301,8 +316,8 @@ input[type="radio"]{
 	color: white;
 	font-family: 'Catamaran', sans-serif;
 	font-size: 32pt;
-	padding-right: 100px;
-	outline: none;
+/*	padding-right: 100px;
+*/	outline: none;
 }
 
 /*PERMALINK*/
@@ -316,8 +331,49 @@ input[type="radio"]{
 	text-decoration: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
-	font-size: 32pt;
+	font-size: 16pt;
 	padding-right: 100px;
 	outline: none;
 }
 
+/*SIGN IN*/
+
+.user-form-box {
+	padding-top: 50px;
+}
+
+.form-header>h2 {
+	font-weight: 500;
+}
+
+.signup-in-form {
+	text-align: center;
+	margin: auto;
+}
+
+.user-form-row {
+	padding-bottom: 10px;
+}
+
+.user-input {
+	height: 30px;
+	width: 300px;
+	outline: none;
+	color: white;
+	font-family: 'Catamaran', sans-serif;
+	font-size: 16pt;
+	padding-left: 10px;
+	margin-left: 15px;
+}
+
+.signin-exchange {
+	text-align: left;
+}
+
+.signin-exchange>a {
+	text-decoration: none;
+	color: white;
+	font-family: 'Catamaran', sans-serif;
+	font-size: 12pt;
+	outline: none;
+}

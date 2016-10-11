@@ -8,8 +8,8 @@ app = webapp2.WSGIApplication([
     ('/', handler.MainPageHandler),
     ('/newpost', handler.NewEntryHandler),
     ('/signup', handler.SignupHandler),
-    ('/login', handler.LoginHandler),
-    ('/logout', handler.LogoutHandler),
+    ('/signin', handler.LoginHandler),
+    ('/signout', handler.LogoutHandler),
     ('/(\w+)/comment', handler.CommentHandler),
     ('/(\w+)/vote', handler.VoteHandler),
     ('/(\w+)', handler.SingleHaikuHandler)

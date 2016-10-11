@@ -8,7 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src='/js/comment.js'></script>
 </head>
-<body class='{{header_color}}'>
+<body>
 	<div class='color-box {{header_color}}'>
 		<div class='container'>
 			<header>
@@ -17,24 +17,6 @@
 						<h1>HAIKUr</h1>
 						<!-- LOGO HERE -->
 					</a>
-				</div>
-				<div class='menu-box'>
-					{% if signedin_username != '' %}
-						<a id='add_new_button' href="/newpost">
-							<img src='/assets/pen.png' id='pen-icon'>
-						</a>
-						<div class='header-username'>
-							<h3>{{signedin_username}}
-								<a href='/signout'>
-									<i class="fa fa-sign-out" aria-hidden="true"></i>
-								</a>
-							</h3>
-						</div>
-					{% else %}
-						<div class='signin-header-box'>
-							<a href='/signin' class='user-prompt'>Sign in to post</a>
-						</div>
-					{% endif %}
 				</div>
 			</header>
 		</div>
