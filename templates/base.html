@@ -24,7 +24,10 @@
 							<img src='/assets/pen.png' id='pen-icon'>
 						</a>
 						<div class='header-username'>
-							<h3>{{signedin_username}}
+							<h3>
+								<a href='/user/{{signedin_username}}' class='userpage-link'>
+									{{signedin_username}}
+								</a>
 								<a href='/signout'>
 									<i class="fa fa-sign-out" aria-hidden="true"></i>
 								</a>
