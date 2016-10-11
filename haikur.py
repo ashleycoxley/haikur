@@ -11,6 +11,7 @@ app = webapp2.WSGIApplication([
     ('/signin', handler.LoginHandler),
     ('/signout', handler.LogoutHandler),
     ('/user/(\w+)', handler.UserPageHandler),
+    ('/edit/(\d+)', handler.EditHandler),
     ('/(\d+)/comment', handler.CommentHandler),
     ('/(\d+)/vote', handler.VoteHandler),
     ('/(\d+)', handler.SingleHaikuHandler),
