@@ -76,6 +76,18 @@ $(document).ready(function(e) {
 	});
 
 
+function changeHaikuColor() {
+	console.log('changed')
+	var mainColor = $(this).parent().data('color');
+	console.log(mainColor)
+	var accentColor = accentColors[mainColor];
+	$('body').css('background', mainColor);
+	$('.color-box').css('background', mainColor);
+	$('input').css('background', accentColor);
+	$('.button').css('background', mainColor);
+	$('.button').css('color', 'white');
+};
+
 
 	$('.vote-icon').on('click', function(e) {
 		e.preventDefault();
@@ -156,17 +168,9 @@ $(document).ready(function(e) {
 		});
 		
  	});
-
-
-
-	$('input[type="radio"]').on('click', function(e) {
-		var mainColor = $(this).parent().data('color');
-		var accentColor = accentColors[mainColor];
-		$('body').css('background', mainColor);
-		$('.color-box').css('background', mainColor);
-		$('input').css('background', accentColor);
-		$('.button').css('background', mainColor);
-		$('.button').css('color', 'white');
-	});
+	
+	// Haiku color choice
+	$('input[name="haiku-color"]:checked').each(changeHaikuColor);
+	$('input[name="haiku-color"]').click(changeHaikuColor);
 });
 

@@ -7,5 +7,6 @@ from login import LoginHandler
 from logout import LogoutHandler
 from vote import VoteHandler
 from userpage import UserPageHandler
-from edit import EditHandler
+from edithaiku import EditHandler
+from deletehaiku import DeleteHaikuHandler
 from handler_helper import HaikurHandler

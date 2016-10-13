@@ -24,6 +24,8 @@ SYLLABLE_ERROR = "Are you sure that's %s syllables?"
 
 SECRET = 'maple'
 
+DEFAULT_COLOR = 'red'
+
 VALIDATION_RE = {
     'username': re.compile(USER_RE),
     'password': re.compile(PW_RE),

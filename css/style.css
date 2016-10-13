@@ -52,7 +52,7 @@ h1, h3 {
 }
 
 .logo-box {
-	width: 75%;
+	width: 50%;
 }
 
 .logo-box>a {
@@ -63,7 +63,7 @@ h1, h3 {
 
 .menu-box {
 	padding-top: 15px;
-	width: 25%;
+	width: 50%;
 	text-align: right;
 }
 
@@ -96,15 +96,16 @@ h1, h3 {
 	box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    height: 470px;
-    padding-top: 100px;
+    height: 500px;
+    padding-top: 160px;
 }
 
 .username-section {
 	padding-top: 10px;
 	width: calc(15% - 40px);
 	text-align: right;
-	padding-right: 40px;
+	direction: rtl;
+	padding-right: 20px;
 }
 
 .haiku-section {
@@ -112,7 +113,7 @@ h1, h3 {
 }
 
 .haiku-container>p {
-	font-size: 32pt;
+	font-size: 30pt;
 	font-weight: 900;
 	line-height: 120%;
 }
@@ -218,6 +219,19 @@ p {
 
 
 /*ENTRY PAGE*/
+
+.cancel-edit-box {
+	width: 100%;
+	text-align: right;
+}
+
+.edit-link {
+	text-decoration: none;
+	color: white;
+	font-family: 'Catamaran', sans-serif;
+	font-size: 10pt;
+	outline: none;
+}
 
 .entry-form {
 	margin: 40px;
@@ -350,7 +364,7 @@ input[type="radio"]{
 	color: white;
 	font-family: 'Catamaran', sans-serif;
 	font-size: 16pt;
-	padding-right: 100px;
+	margin-right: 100px;
 	outline: none;
 }
 

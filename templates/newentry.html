@@ -3,42 +3,58 @@
 {% block content %}
 	<div class='container'>
 		<form class='entry-form' method='post'>
+			{% if edit == True %}
+				<div class='cancel-edit-box'>
+					<a href='javascript:history.back()' class='edit-link'>CANCEL EDIT</a>
+				</div>
+			{% endif %}
 			<div class='entry-form-box'>
 				<div class='haiku-entry-row'>
 					<input type='text' name='stanza1' class='haiku-input five-syllable' value='{{stanza1}}' placeholder='5 SYLLABLES'>
-					{{stanza1_error}}
+					<p class='haiku-error-text'>
+						{{stanza1_error}}
+					</p>
 				</div>
 				<div class='haiku-entry-row'>
 					<input type='text' name='stanza2' class='haiku-input seven-syllable' value='{{stanza2}}' placeholder='7 SYLLABLES'>
-					{{stanza2_error}}
+					<p class='haiku-error-text'>
+						{{stanza2_error}}
+					</p>
 				</div>
 				<div class='haiku-entry-row'>
 					<input type='text' name='stanza3' class='haiku-input five-syllable' value='{{stanza3}}' placeholder='5 SYLLABLES'>
-					{{stanza3_error}}
+					<p class='haiku-error-text'>
+						{{stanza3_error}}
+					</p>
 				</div>
 			</div>
 			<div class='form-footer'>
 				<div class='color-choice'>
 					<label class='color-option red' data-color='#f24962'>
-						<input type='radio' name='haiku-color' value='red'>
+						<input type='radio' name='haiku-color' value='red' {{red}}>
 					</label>
 					<label class='color-option blue' data-color='#44bfea'>
-						<input type='radio' name='haiku-color' value='blue'>
+						<input type='radio' name='haiku-color' value='blue' {{blue}}>
 					</label>
 					<label class='color-option green' data-color='#61e296'>
-						<input type='radio' name='haiku-color' value='green'>
+						<input type='radio' name='haiku-color' value='green' {{green}}>
 					</label>
 					<label class='color-option pink' data-color='#da65ef'>
-						<input type='radio' name='haiku-color' value='pink'>
+						<input type='radio' name='haiku-color' value='pink' {{pink}}>
 					</label>
 					<label class='color-option yellow' data-color='#f4e067'>
-						<input type='radio' name='haiku-color' value='yellow'>
+						<input type='radio' name='haiku-color' value='yellow' {{yellow}}>
 					</label>
 					<label class='color-option black' data-color='#282828'>
-						<input type='radio' name='haiku-color' value='black'>
+						<input type='radio' name='haiku-color' value='black' {{black}}>
 					</label>
 				</div>
 				<div class='button-box'>
+					{% if edit == True %}
+						<div class='delete-box'>
+							<a href='/{{haiku_id}}/delete' class='edit-link'>DELETE POST</a>
+						</div>
+					{% endif %}
 					<input type='submit' value='POST' class='button'>
 				</div>
 			</div>

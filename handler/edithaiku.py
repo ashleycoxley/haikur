@@ -7,6 +7,19 @@ from google.appengine.ext import ndb
 import datetime
 
 
+def get_radio_button_values(color):
+    radio_button_values = {
+        'red': '',
+        'blue': '',
+        'green': '',
+        'pink': '',
+        'yellow': '',
+        'black': '',
+    }
+    radio_button_values[color] = 'checked = "checked"'
+    return radio_button_values
+
+
 class EditHandler(HaikurHandler):
     def get(self, haiku_id):
         haiku = model.Haiku.get_by_id(int(haiku_id))
@@ -14,15 +27,28 @@ class EditHandler(HaikurHandler):
             self.redirect('/')
         stanza1 = haiku.stanza1
         stanza2 = haiku.stanza2
-        stanza3 = haiku.stanza3            
+        stanza3 = haiku.stanza3
+        color = haiku.color
+        
+        print haiku_id
+        radio_button_values = get_radio_button_values(color)
+
         signedin_username = self.get_username_by_cookie()
         if signedin_username:
             entry_form = JINJA_ENV.get_template('newentry.html')
             self.response.write(entry_form.render(
                 signedin_username=signedin_username,
+                edit=True,
+                haiku_id=haiku_id,
                 stanza1=stanza1,
                 stanza2=stanza2,
-                stanza3=stanza3
+                stanza3=stanza3,
+                red=radio_button_values['red'],
+                blue=radio_button_values['blue'],
+                green=radio_button_values['green'],
+                yellow=radio_button_values['yellow'],
+                pink=radio_button_values['pink'],
+                black=radio_button_values['black']
                 ))
         else:
             self.redirect('/signin')
