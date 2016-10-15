@@ -1,6 +1,6 @@
 # HAIKUr
 
-This is a haiku-blogging app. You can view it live at [http://haikur.com]
+This is a haiku-blogging app. You can view it live here: [HAIKUr](http://haikur.com)
 
 
 ## Running HAIKUr
@@ -17,4 +17,4 @@ Running HAIKUr requires Python 2.7, a Google account registered with Google Deve
 
 ### Deploying to Google App Engine
 + ```gcloud app deploy```
-+ ```gcloud app browse
++ ```gcloud app browse```
