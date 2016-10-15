@@ -13,6 +13,8 @@ app = webapp2.WSGIApplication([
     ('/user/(\w+)', handler.UserPageHandler),
     ('/(\d+)/edit', handler.EditHandler),
     ('/(\d+)/delete', handler.DeleteHaikuHandler),
+    ('/(\d+)/comment/(\d+)/delete', handler.DeleteCommentHandler),
+    ('/(\d+)/comment/(\d+)/edit', handler.EditCommentHandler),
     ('/(\d+)/comment', handler.CommentHandler),
     ('/(\d+)/vote', handler.VoteHandler),
     ('/(\d+)', handler.SingleHaikuHandler),

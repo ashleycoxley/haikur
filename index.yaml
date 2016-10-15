@@ -10,6 +10,17 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Comment
+  properties:
+  - name: haiku_ref
+  - name: created_date
+
+- kind: Comment
+  properties:
+  - name: haiku_ref
+  - name: created_date
+    direction: desc
+
 - kind: Haiku
   properties:
   - name: username

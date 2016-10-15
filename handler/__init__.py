@@ -9,4 +9,6 @@ from vote import VoteHandler
 from userpage import UserPageHandler
 from edithaiku import EditHandler
 from deletehaiku import DeleteHaikuHandler
+from deletecomment import DeleteCommentHandler
+from editcomment import EditCommentHandler
 from handler_helper import HaikurHandler

@@ -19,7 +19,7 @@
 						</p>
 					</div>
 					<div class='vote-section' data-haikuid='{{haiku.key.id()|string}}'>
-						<div class='vote-box' id='upvote-box'>
+						<div class='vote-box upvote-box'>
 							{% if signedin_username in haiku.upvote_usernames %}
 								{% set upvote_img = '/assets/upvote_selected.png' 	%}
 							{% else %}
@@ -30,9 +30,9 @@
 							{% if upvotes == 0 %}
 								{% set upvotes = '' %}
 							{% endif %}
-							<p class='vote-count' id='upvote-count'>{{upvotes}}</p>
+							<p class='vote-count upvote-count'>{{upvotes}}</p>
 						</div>
-						<div class='vote-box' id='downvote-box'>
+						<div class='vote-box downvote-box'>
 							{% if signedin_username in haiku.downvote_usernames %}
 								{% set downvote_img = '/assets/downvote_selected.png'%}
 							{% else %}
@@ -43,7 +43,7 @@
 							{% if downvotes == 0 %}
 								{% set downvotes = '' %}
 							{% endif %}
-							<p class='vote-count' id='downvote-count'>{{downvotes}}</p>
+							<p class='vote-count downvote-count'>{{downvotes}}</p>
 						</div>
 						{% if signedin_username == haiku.username %}
 						<div class='edit-box'>
@@ -55,7 +55,7 @@
 				<div class='comment-section'>
 					<div class='comment-header'>
 						<input type='image' class='comment-icon' src='/assets/comments.png'>
-						{% set comment_query = Comment.query(Comment.haiku_ref==haiku.key) %}
+						{% set comment_query = Comment.query(Comment.haiku_ref==haiku.key).order(Comment.created_date) %}
 						{% set comment_count = comment_query.count() %}
 						{% if comment_count == 0 %}
 							{% set comment_count = '' %}
@@ -66,9 +66,15 @@
 						<div class='comment-list'>
 							{% set comments = comment_query.fetch() %}
 							{% for comment in comments: %}
-							<div class='comment-container'>
+							<div class='comment-container' data-commentid={{comment.key.id()|string}}>
 								<p class='comment-username'>{{comment.username}}</p>
 								<p class='comment-text'>{{comment.comment_text}}</p>
+								{% if comment.username == signedin_username %}
+								<div class='comment-edit-box'>
+									<img src='/assets/comment-delete.png' class='comment-edit-button comment-delete'>
+									<img src='/assets/comment-edit.png' class='comment-edit-button comment-edit'>
+								</div>
+								{% endif %}
 							</div>
 							{% endfor %}
 						</div>
@@ -76,7 +82,7 @@
 						<div class='comment-add' data-haikuid='{{haiku.key.id()|string}}'>
 							<form class='comment-form' method='post'>
 								<div class='comment-form-box'>
-									<textarea class='new-comment-text {{haiku.color}}' name='comment_text'></textarea>
+									<textarea class='new-comment-text {{haiku.color}}-accent' name='comment_text'></textarea>
 								</div>
 								<div class='form-footer'>
 									<div class='button-box'>

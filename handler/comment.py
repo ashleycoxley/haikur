@@ -1,6 +1,7 @@
 from handler_helper import HaikurHandler
 import model
 from google.appengine.ext import ndb
+import json
 
 class CommentHandler(HaikurHandler):
     def post(self, haiku_id):
@@ -18,3 +19,5 @@ class CommentHandler(HaikurHandler):
                 comment_text=comment_text
                 )
             comment_key = comment.put()
+            comment_response = {'commentID': comment_key.id()}
+            self.response.write(json.dumps(comment_response))

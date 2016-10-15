@@ -11,6 +11,8 @@ body {
     display: flex;
     flex-wrap: wrap;
 	padding-top: 10px;
+	padding-right: 15px;
+	padding-left: 15px;
 	max-width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
@@ -55,10 +57,10 @@ h1, h3 {
 	width: 50%;
 }
 
-.logo-box>a {
-	font-family: 'Catamaran', sans-serif;
-	color: white;
-	text-decoration: none;
+#logo {
+	padding-top: 30px;
+	width: 250px;
+	height: auto;
 }
 
 .menu-box {
@@ -157,6 +159,10 @@ h1, h3 {
 	font-family: 'Catamaran', sans-serif;
 }
 
+.delete {
+	float: left;
+}
+
 .comment-section {
 	width: 20%;
 }
@@ -196,21 +202,49 @@ p {
 
 .comment-box {
 	height: 70%;
-	overflow: scroll;
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.comment-container {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.comment-edit-box {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.comment-edit-button {
+	height: 15px;
+	width: auto;
+	padding-top: 5px;
+	padding-right: 13px;
+	padding-bottom: 10px;
+	cursor: pointer;
+}
+
+#comment-edit {
+	padding-top: 6px;
 }
 
 .button-box>input {
 	border: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
-	font-size: 14pt;
+	font-size: 12pt;
 	outline: none;
 }
 
 .new-comment-text {
 	outline: none;
-	width: 100%;
+	color: white;
+	font-family: 'Catamaran', sans-serif;
+	font-size: 10pt;
+	width: 95%;
 	height: 40px;
+	background: transparent;
 }
 
 .hide {
@@ -231,6 +265,7 @@ p {
 	font-family: 'Catamaran', sans-serif;
 	font-size: 10pt;
 	outline: none;
+	margin-right: 10px;
 }
 
 .entry-form {
@@ -336,10 +371,33 @@ input[type="radio"]{
 	background-color: #282828;
 }
 
+.red-accent {
+	background-color: #e03b55;
+}
+
+.blue-accent {
+	background-color: #2b85ae;
+}
+
+.green-accent {
+	background-color: #3da567;
+}
+
+.pink-accent {
+	background-color: #c93fda;
+}
+
+.yellow-accent {
+	background-color: #cdb942;
+}
+
+.black-accent {
+	background-color: #7b7b7b;
+}
+
 .button-box {
 	width: 100%;
 	text-align: right;
-	margin-top: 15px;
 }
 
 .button {
@@ -348,8 +406,7 @@ input[type="radio"]{
 	color: white;
 	font-family: 'Catamaran', sans-serif;
 	font-size: 32pt;
-/*	padding-right: 100px;
-*/	outline: none;
+	outline: none;
 }
 
 /*PERMALINK*/
