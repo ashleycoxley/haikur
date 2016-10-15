@@ -280,6 +280,7 @@ var accentColors = {
 
 function changeHaikuColor() {
 	var mainColor = $(this).parent().data('color');
+	console.log(mainColor);
 	var accentColor = accentColors[mainColor];
 	$('body').css('background', mainColor);
 	$('.color-box').css('background', mainColor);

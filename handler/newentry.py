@@ -14,6 +14,7 @@ class NewEntryHandler(HaikurHandler):
             entry_form = JINJA_ENV.get_template('newentry.html')
             self.response.write(entry_form.render(
                 signedin_username=signedin_username,
+                red="checked='checked'",
                 edit=False
                 ))
         else:
