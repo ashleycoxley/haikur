@@ -57,5 +57,3 @@ class VoteHandler(HaikurHandler):
             change_vote(haiku, signedin_username, vote_type, 'increment')
             vote_response = {'change': 'current_increment'}
             self.response.write(json.dumps(vote_response))
-
-

@@ -2,6 +2,7 @@ from handler_helper import HaikurHandler
 from helper.global_vars import JINJA_ENV
 from google.appengine.ext import ndb
 
+
 class SingleHaikuHandler(HaikurHandler):
     def get(self, haiku_id):
         signedin_username = self.get_username_by_cookie()

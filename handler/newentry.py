@@ -6,7 +6,6 @@ from helper.haiku_validation import *
 from google.appengine.ext import ndb
 
 
-
 class NewEntryHandler(HaikurHandler):
     def get(self):
         signedin_username = self.get_username_by_cookie()
