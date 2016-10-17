@@ -36,7 +36,7 @@ class VoteHandler(HaikurHandler):
         haiku_key = ndb.Key('Haiku', int(haiku_id))
         haiku = haiku_key.get()
 
-        if self.not_signed_in or signedin_username == haiku.username:
+        if self.not_signed_in(user_id) or signedin_username == haiku.username:
             self.abort(403)
         
         upvoters = haiku.upvote_usernames

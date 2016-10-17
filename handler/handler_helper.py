@@ -1,5 +1,6 @@
 import webapp2
 from helper import user_validation
+from helper.global_vars import JINJA_ENV
 import model
 
 class HaikurHandler(webapp2.RequestHandler):
@@ -27,6 +28,8 @@ class HaikurHandler(webapp2.RequestHandler):
                 return user.username
 
     def not_signed_in(self, user_id):
+        print user_id
         if user_id is None:
             return True
-
+        else:
+            return False

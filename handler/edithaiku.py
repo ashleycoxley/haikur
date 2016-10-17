@@ -33,7 +33,7 @@ class EditHandler(HaikurHandler):
         radio_button_values = get_radio_button_values(color)
 
         signedin_username = self.get_username_by_cookie()
-        if self.not_signed_in or signedin_username != haiku.username:
+        if signedin_username != haiku.username:
             self.abort(403)
 
         entry_form = JINJA_ENV.get_template('newentry.html')

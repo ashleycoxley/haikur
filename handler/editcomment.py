@@ -12,7 +12,7 @@ class EditCommentHandler(HaikurHandler):
         signedin_username = self.get_username_by_cookie()
         comment = model.Comment.get_by_id(int(comment_id))
 
-        if self.not_signed_in or signedin_username != comment.username:
+        if signedin_username != comment.username:
             self.abort(403)
 
         edited_text = self.request.get('editedText')

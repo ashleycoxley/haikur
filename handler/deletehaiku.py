@@ -16,8 +16,8 @@ class DeleteHaikuHandler(HaikurHandler):
     def get(self, haiku_id):
     	signedin_username = self.get_username_by_cookie()
     	haiku_author = model.Haiku.get_by_id(int(haiku_id)).username
-    	if signedin_username is None or signedin_username != haiku_author:
-    		self.redirect('/')
-        else:
+    	if signedin_username == haiku_author:
             delete_haiku(haiku_id)
+            self.redirect('/')
+        else:
             self.redirect('/')
