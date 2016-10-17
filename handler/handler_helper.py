@@ -25,3 +25,8 @@ class HaikurHandler(webapp2.RequestHandler):
             user = model.User.get_by_id(int(user_id))
             if user:
                 return user.username
+
+    def not_signed_in(self, user_id):
+        if user_id is None:
+            return True
+

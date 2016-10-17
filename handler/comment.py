@@ -1,11 +1,16 @@
 from handler_helper import HaikurHandler
 import model
+from helper.global_vars import *
+
 from google.appengine.ext import ndb
 import json
+
 
 class CommentHandler(HaikurHandler):
     def post(self, haiku_id):
         user_id = self.read_user_cookie()
+        if self.not_signed_in(user_id):
+            self.abort(403)
         signedin_username = self.get_username_by_cookie()
         comment_text = self.request.get('commentText')
         haiku_id = self.request.get('haikuID')

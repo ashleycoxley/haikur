@@ -30,28 +30,28 @@ class EditHandler(HaikurHandler):
         stanza3 = haiku.stanza3
         color = haiku.color
         
-        print haiku_id
         radio_button_values = get_radio_button_values(color)
 
         signedin_username = self.get_username_by_cookie()
-        if signedin_username:
-            entry_form = JINJA_ENV.get_template('newentry.html')
-            self.response.write(entry_form.render(
-                signedin_username=signedin_username,
-                edit=True,
-                haiku_id=haiku_id,
-                stanza1=stanza1,
-                stanza2=stanza2,
-                stanza3=stanza3,
-                red=radio_button_values['red'],
-                blue=radio_button_values['blue'],
-                green=radio_button_values['green'],
-                yellow=radio_button_values['yellow'],
-                pink=radio_button_values['pink'],
-                black=radio_button_values['black']
-                ))
-        else:
-            self.redirect('/signin')
+        if self.not_signed_in or signedin_username != haiku.username:
+            self.abort(403)
+
+        entry_form = JINJA_ENV.get_template('newentry.html')
+        self.response.write(entry_form.render(
+            signedin_username=signedin_username,
+            edit=True,
+            haiku_id=haiku_id,
+            stanza1=stanza1,
+            stanza2=stanza2,
+            stanza3=stanza3,
+            red=radio_button_values['red'],
+            blue=radio_button_values['blue'],
+            green=radio_button_values['green'],
+            yellow=radio_button_values['yellow'],
+            pink=radio_button_values['pink'],
+            black=radio_button_values['black']
+            ))
+
 
     def post(self, haiku_id):
         user_id = self.read_user_cookie()
