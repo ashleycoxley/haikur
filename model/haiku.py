@@ -8,6 +8,7 @@ class Haiku(ndb.Model):
     stanza2 = ndb.StringProperty(required=True)
     stanza3 = ndb.StringProperty(required=True)
     color = ndb.StringProperty()
+    width = ndb.StringProperty()
     created_date = ndb.DateTimeProperty(auto_now_add=True)
     edited_date = ndb.DateTimeProperty()
     upvotes = ndb.IntegerProperty(default=0)

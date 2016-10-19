@@ -31,3 +31,11 @@ def stanza_invalid(stanza, syllable_count):
         return HAIKU_ERROR_MESSAGES['incomplete']
     else:
         return ""
+
+
+def set_width(stanza1, stanza2, stanza3):
+    width = 'normal'
+    for stanza in (stanza1, stanza2, stanza3):
+        if len(stanza) >= 35:
+            width = 'wide'
+    return width

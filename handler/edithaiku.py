@@ -70,11 +70,14 @@ class EditHandler(HaikurHandler):
             ])
 
         if form_valid:
+            width = set_width(new_stanza1, new_stanza2, new_stanza3)
             haiku = model.Haiku.get_by_id(int(haiku_id))
+
             haiku.stanza1 = new_stanza1
             haiku.stanza2 = new_stanza2
             haiku.stanza3 = new_stanza3
             haiku.color = new_color
+            haiku.width = width
             haiku.edited_date = datetime.datetime.now()
 
             haiku_key = haiku.put()

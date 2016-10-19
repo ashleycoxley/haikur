@@ -6,14 +6,14 @@
 			<div class='user-form-box'>
 				<div class='user-form-row'>
 					<label for='username'>USERNAME</label>
-					<input type='text' name='username' value='{{username}}' class='user-input'>
+					<input type='text' name='username' value='{{username}}' class='user-input {{header_color}}-accent'>
 					<p class='input-error'>
 						{{username_error}}
 					</p>
 				</div>
 				<div class='user-form-row'>
 					<label for='username'>PASSWORD</label>
-					<input type='password' name='password' class='user-input'>
+					<input type='password' name='password' class='user-input {{header_color}}-accent'>
 					<p class='input-error'>
 						{{password_error}}
 					</p>
@@ -21,7 +21,7 @@
 			</div>
 			<div class='form-footer'>
 				<div class='button-box'>
-					<input type='submit' value='SIGN IN' class='button'>
+					<input type='submit' value='SIGN IN' class='user-submit-button'>
 				</div>
 				<div class='signin-exchange'>
 					<a href='/signup' class='user-prompt'>Need to sign up?</a>

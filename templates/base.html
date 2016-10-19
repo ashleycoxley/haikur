@@ -7,6 +7,7 @@
 	<script src="https://use.fontawesome.com/26b2bf4975.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src='/js/script.js'></script>
+	<script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
 </head>
 <body class='{{header_color}}'>
 	<div class='color-box {{header_color}}'>
@@ -14,31 +15,30 @@
 			<header>
 				<div class='logo-box'>
 					<a href='/'>
-						<!-- <h1>HAIKUr</h1> -->
 						<img src="/assets/logo.png" id='logo'>
 					</a>
 				</div>
-				<div class='menu-box'>
-					{% if signedin_username != '' %}
-						<a id='add_new_button' href="/newpost">
-							<img src='/assets/pen.png' id='pen-icon'>
+				{% if signedin_username != '' %}
+				<div class='header-username-box'>
+					<div class='username-logout'>
+						<a href='/user/{{signedin_username}}' class='userpage-link' id='signedin-username'>
+							{{signedin_username}}
 						</a>
-						<div class='header-username'>
-							<h3>
-								<a href='/user/{{signedin_username}}' class='userpage-link'>
-									{{signedin_username}}
-								</a>
-								<a href='/signout'>
-									<i class="fa fa-sign-out" aria-hidden="true"></i>
-								</a>
-							</h3>
-						</div>
-					{% else %}
-						<div class='signin-header-box'>
-							<a href='/signin' class='user-prompt'>Sign in to post</a>
-						</div>
-					{% endif %}
+						<a href='/signout'>
+							<img src="/assets/logout.png" id='signout-icon'></i>
+						</a>
+					</div>
 				</div>
+				<div class='add-new-box'>
+					<a id='add_new_button' href="/newpost">
+						<img src='/assets/pen.png' id='pen-icon'>
+					</a>
+				</div>
+				{% else %}
+				<div class='signin-header-box'>
+					<a href='/signin' class='user-prompt signin'>Sign in to post</a>
+				</div>
+				{% endif %}
 			</header>
 		</div>
 	</div>

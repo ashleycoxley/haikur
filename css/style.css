@@ -13,29 +13,22 @@ body {
 	padding-top: 10px;
 	padding-right: 15px;
 	padding-left: 15px;
-	max-width: 1000px;
+	max-width: 1100px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 input[type='text'], input[type='password'], textarea {
-	background-color: #e03b55;
 	border: 0;
 }
 
-.user-prompt {
+a {
 	text-decoration: none;
-	color: white;
-	font-family: 'Catamaran', sans-serif;
-	font-size: 12pt;
 	outline: none;
+	color: white;
 }
 
 .userpage-link {
-	text-decoration: none;
-	color: white;
-	font-family: 'Catamaran', sans-serif;
-	font-weight: 500;
 	font-size: 14pt;
 }
 
@@ -49,45 +42,60 @@ header {
     flex-wrap: wrap;
 }
 
-h1, h3 {
-	font-weight: 500;
-}
-
 .logo-box {
-	width: 50%;
+	width: 30%;
 }
 
 #logo {
-	padding-top: 55px;
+	padding-top: 40px;
 	width: 130px;
 	height: auto;
 }
 
-.menu-box {
-	padding-top: 15px;
-	width: 50%;
+.header-username-box {
+	width: 55%;
+	text-align: right;
+	padding-top: 45px;
+}
+
+.add-new-box {
+	width: 15%;
+	position: relative;
+}
+
+.signin-header-box {
+	padding-top: 49px;
+	width: 70%;
 	text-align: right;
 }
 
-.header-username>h3 {
-	margin: 0;
+.user-prompt {
+	font-size: 12pt;
 }
 
 #pen-icon {
 	height: 35px;
 	width: auto;
+	position: absolute;
+    bottom: 9px;
+    right: 10px;
 }
 
 .header-username {
     text-align: right;
 }
 
-.fa  {
-	color: white;
+#signedin-username {
+	margin-right: 5px;
 }
 
-.signin-header-box {
-	margin-top: 20px;
+#signout-icon {
+	height: 12px;
+	width: auto;
+}
+
+.fa  {
+	color: white;
 }
 
 
@@ -104,20 +112,30 @@ h1, h3 {
 
 .username-section {
 	padding-top: 10px;
-	width: calc(15% - 40px);
+	width: calc(16% - 40px);
 	text-align: right;
-	direction: rtl;
 	padding-right: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .haiku-section {
-	width: 65%;
+	width: 64%;
+	min-width: 650px;
 }
 
-.haiku-container>p {
+.haiku-text {
 	font-size: 30pt;
 	font-weight: 900;
 	line-height: 120%;
+}
+
+.normal {
+	
+}
+
+.wide {
+	font-size: 26pt; 
 }
 
 .vote-section {
@@ -153,14 +171,9 @@ h1, h3 {
 	font-size: 10pt;
 }
 
-.edit-link {
-	text-decoration: none;
-	color: white;
-	font-family: 'Catamaran', sans-serif;
-}
-
 .delete {
 	float: left;
+	padding-top: 15px;
 }
 
 .comment-section {
@@ -193,6 +206,8 @@ p {
 
 .comment-username {
 	font-weight: 900;
+	overflow: hidden;
+  	text-overflow: ellipsis;
 }
 
 .comment-text {
@@ -200,13 +215,13 @@ p {
 	font-size: 10pt;
 }
 
-.comment-box {
+.comment-list-container {
 	height: 70%;
 	width: 100%;
 	overflow-x: hidden;
 }
 
-.comment-container {
+.individual-comment-box {
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
@@ -229,7 +244,8 @@ p {
 	padding-top: 6px;
 }
 
-.button-box>input {
+.comment-button {
+	background: transparent;
 	border: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
@@ -238,13 +254,13 @@ p {
 }
 
 .new-comment-text {
+	margin-top: 10px;
 	outline: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
 	font-size: 10pt;
 	width: 95%;
 	height: 40px;
-	background: transparent;
 }
 
 .hide {
@@ -260,16 +276,13 @@ p {
 }
 
 .edit-link {
-	text-decoration: none;
-	color: white;
-	font-family: 'Catamaran', sans-serif;
 	font-size: 10pt;
-	outline: none;
 	margin-right: 10px;
 }
 
 .entry-form {
 	margin: 40px;
+	margin-left: 135px;
 }
 
 .haiku-input {
@@ -294,28 +307,32 @@ p {
 }
 
 ::-webkit-input-placeholder {
-   color: #d1d1d1;
+   color: #000000;
+   opacity: 0.3;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #d1d1d1;
+   color: #000000;
+   opacity: 0.3;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #d1d1d1;
+   color: #000000;
+   opacity: 0.3;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
 }
 
 :-ms-input-placeholder {  
-   color: #d1d1d1;
+   color: #000000;
+   opacity: 0.3;
    font-family: 'Catamaran', sans-serif;
    font-weight: 500;
    font-size: 32pt;
@@ -337,9 +354,11 @@ input[type="radio"]{
 }
 
 .color-option {
-	border: 4px solid;
+	border: 4px solid #565656; 
+	border: 4px solid rgba(0, 0, 0, .3);
+	-webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
 	border-radius: 50%;
-	border-color: #7f7f7f;
 	width: 20px;
 	height: 20px;
 	margin-right: 10px;
@@ -368,7 +387,7 @@ input[type="radio"]{
 }
 
 .black {
-	background-color: #282828;
+	background-color: #333333;
 }
 
 .red-accent {
@@ -400,13 +419,17 @@ input[type="radio"]{
 	text-align: right;
 }
 
-.button {
+.user-submit-button {
 	background-color: #f24962;
 	border: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
-	font-size: 32pt;
+	font-weight: 900;
+	font-size: 16pt;
 	outline: none;
+	height: 30px;
+	border-bottom: 1px solid white;
+	background: transparent;
 }
 
 /*PERMALINK*/
@@ -417,12 +440,8 @@ input[type="radio"]{
 }
 
 .mainpage-link {
-	text-decoration: none;
-	color: white;
-	font-family: 'Catamaran', sans-serif;
 	font-size: 16pt;
 	margin-right: 100px;
-	outline: none;
 }
 
 /*SIGN IN*/
@@ -436,7 +455,7 @@ input[type="radio"]{
 }
 
 .signup-in-form {
-	text-align: center;
+	text-align: right;
 	margin: auto;
 }
 
@@ -445,7 +464,7 @@ input[type="radio"]{
 }
 
 .user-input {
-	height: 30px;
+	height: 35px;
 	width: 300px;
 	outline: none;
 	color: white;

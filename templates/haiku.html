@@ -7,12 +7,12 @@
 			<div class='haiku-box'>
 				<div class='username-section'>
 					<a href='/user/{{haiku.username}}' class='userpage-link'>
-						<p>{{haiku.username}}</p>
+						{{haiku.username}}
 					</a>
 				</div>
 				<div class='haiku-section'>
 					<div class='haiku-container'>
-						<p>
+						<p class='haiku-text {{haiku.width}}'>
 							{{haiku.stanza1}}<br>
 							{{haiku.stanza2}}<br>
 							{{haiku.stanza3}}<br>
@@ -62,11 +62,11 @@
 						{% endif %}
 						<p>{{comment_count}}</p>
 					</div>
-					<div class='comment-box hide'>
+					<div class='comment-list-container hide'>
 						<div class='comment-list'>
 							{% set comments = comment_query.fetch() %}
 							{% for comment in comments: %}
-							<div class='comment-container' data-commentid={{comment.key.id()|string}}>
+							<div class='individual-comment-box' data-commentid={{comment.key.id()|string}}>
 								<p class='comment-username'>{{comment.username}}</p>
 								<p class='comment-text'>{{comment.comment_text}}</p>
 								{% if comment.username == signedin_username %}
@@ -86,7 +86,7 @@
 								</div>
 								<div class='form-footer'>
 									<div class='button-box'>
-										<input type='submit' value='POST COMMENT' class='{{haiku.color}}'>
+										<input type='submit' class='comment-button' value='POST COMMENT'>
 									</div>
 								</div>
 							</form>

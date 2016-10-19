@@ -36,7 +36,8 @@ class LoginHandler(HaikurHandler):
             self.redirect('/')
         else:
             login_page = JINJA_ENV.get_template('login.html')
-            self.response.write(login_page.render())
+            self.response.write(login_page.render(
+                header_color=DEFAULT_COLOR))
 
     def post(self):
         username = self.request.get('username')

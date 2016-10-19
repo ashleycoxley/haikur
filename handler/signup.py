@@ -61,7 +61,8 @@ def add_user(username, password, email):
 class SignupHandler(HaikurHandler):
     def get(self):
         signup_form = JINJA_ENV.get_template('/signup.html')
-        self.response.write(signup_form.render())
+        self.response.write(signup_form.render(
+            header_color=DEFAULT_COLOR))
 
     def post(self):
         username = self.request.get('username')

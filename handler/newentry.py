@@ -12,6 +12,7 @@ class NewEntryHandler(HaikurHandler):
         if signedin_username:
             entry_form = JINJA_ENV.get_template('newentry.html')
             self.response.write(entry_form.render(
+                header_color=DEFAULT_COLOR,
                 signedin_username=signedin_username,
                 red="checked='checked'",
                 edit=False
@@ -36,6 +37,7 @@ class NewEntryHandler(HaikurHandler):
             ])
 
         if form_valid:
+            width = set_width(stanza1, stanza2, stanza3)
             haiku = model.Haiku(
                 user_key=model.User.get_by_id(int(user_id)).key,
                 username=model.User.get_by_id(int(user_id)).username,
@@ -43,6 +45,7 @@ class NewEntryHandler(HaikurHandler):
                 stanza2=stanza2,
                 stanza3=stanza3,
                 color=color,
+                width=width
                 )
             haiku_key = haiku.put()
             haiku_id = str(haiku_key.id())

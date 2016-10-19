@@ -1,22 +1,8 @@
 // HELPERS
 
 function getSelfUsername() {
-	return $.trim($('.menu-box h3').text());
+	return $.trim($('#signedin-username').text());
 }
-
-function voterInvalid(voteInstance) {
-	var selfUsername = getSelfUsername();
-	var haikuUsername = voteInstance
-		.parent()
-		.parent()
-		.parent()
-		.siblings('.username-section')
-		.find('p')
-		.text();
-	if (selfUsername == haikuUsername) {
-		return true;
-	}
-};
 
 // COMMENTS
 
@@ -230,13 +216,8 @@ function changeVote(voteInstance, changeType) {
 
 function upvoteDownvote(e) {
 	e.preventDefault();
-	var voteInstance = $(this)
+	var voteInstance = $(this);
 
-	// Check that voter is not author of haiku
-	if (voterInvalid(voteInstance)) {
-		return;
-	}
-		
 	// Assemble voting data for POST request
 	var haikuID = voteInstance.parent().parent().attr('data-haikuid');
 	var voteType = voteInstance.attr('id');
@@ -275,7 +256,7 @@ var accentColors = {
 	'#61e296': '#3da567',
 	'#da65ef': '#c93fda',
 	'#f4e067': '#cdb942',
-	'#282828': '#7b7b7b',
+	'#333333': '#7b7b7b',
 }
 
 function changeHaikuColor() {
@@ -284,7 +265,7 @@ function changeHaikuColor() {
 	var accentColor = accentColors[mainColor];
 	$('body').css('background', mainColor);
 	$('.color-box').css('background', mainColor);
-	$('input').css('background', accentColor);
+	$('.haiku-input').css('background', accentColor);
 	$('.button').css('background', mainColor);
 	$('.button').css('color', 'white');
 };
@@ -294,7 +275,14 @@ function changeHaikuColor() {
 $(document).ready(function(e) {
 	// Show/hide comment section
 	$('.comment-icon').on('click', function(e) {
-  		$(this).parent().siblings('.comment-box').toggleClass('hide');
+  		$(this).parent().siblings('.comment-list-container').toggleClass('hide');
+	});
+
+	// Comment scrollbar
+	$(".comment-list-container").niceScroll({
+		cursorcolor: '#ffffff',
+		cursorwidth: '3px',
+		cursorborder: '0px',
 	});
 
 	// Submit comment form

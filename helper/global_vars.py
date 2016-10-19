@@ -6,7 +6,7 @@ TEMPLATE_DIR = os.path.join('templates')
 JINJA_ENV = jinja2.Environment(loader=jinja2.FileSystemLoader(TEMPLATE_DIR), 
     autoescape=True)
 
-USER_RE = r"^[a-zA-Z0-9_-]{3,20}$"
+USER_RE = r"^[a-zA-Z0-9_-]{3,16}$"
 PW_RE = r"^.{3,20}$"
 EMAIL_RE = r"^[\S]+@[\S]+.[\S]+$"
 
