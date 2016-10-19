@@ -246,6 +246,7 @@ p {
 }
 
 .comment-list-box {
+	margin-top: 5px;
 	width: 88%;
 	/*overflow-x: hidden;*/
 }
@@ -268,8 +269,7 @@ p {
 }
 
 .individual-comment-box {
-	margin-top: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 .comment-edit-box, .comment-add-box {
@@ -298,6 +298,7 @@ p {
 	padding-right: 13px;
 	padding-bottom: 10px;
 	cursor: pointer;
+	float: left;
 }
 
 #comment-edit {
@@ -313,6 +314,7 @@ p {
 	font-size: 12pt;
 	text-decoration: underline;
 	outline: none;
+	cursor: pointer;
 }
 
 .new-comment-text {

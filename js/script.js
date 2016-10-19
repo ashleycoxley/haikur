@@ -30,8 +30,8 @@ var commentInputTemplate = "<form method='post'>" +
 	"</div>" +
 	"<div class='form-footer'>" +
 	"	<div class='button-box'>" +
-	"		<img src='/assets/comments_close.png' class='comment-edit-button'>" +
-	"		<input type='submit' value='SUBMIT EDIT' class='comment-edit-submit COLOR'>" +
+	"		<img src='/assets/comments_close.png' class='comment-edit-button close-comment-edit'>" +
+	"		<input type='submit' value='SUBMIT' class='comment-button'>" +
 	"	</div>" +
 	"</div>" +
 	"</form>"
@@ -55,7 +55,7 @@ function displayEditComment() {
 		.attr('class')
 		.split(' ')[1]
 	var commentContainer = commentEditInstance
-		.closest('.comment-container');
+		.closest('.individual-comment-box');
 
 	var editBox = buildCommentEditBox(commentInputTemplate, commentText, color);
 
@@ -72,12 +72,12 @@ function editComment(e) {
 	var username = getSelfUsername();
 	var commentEditSubmitInstance= $(this);
 	var commentContainer = commentEditSubmitInstance
-		.closest('.comment-container');
+		.closest('.individual-comment-box');
 	var commentID = commentContainer
 		.attr('data-commentid');
 	var haikuID = commentEditSubmitInstance
-		.closest('.comment-list')
-		.siblings('.comment-add')
+		.closest('.comment-scroll-list-box')
+		.siblings('.comment-add-box')
 		.attr('data-haikuid');
 	var editedText = commentEditSubmitInstance
 		.find('.new-comment-text')
@@ -99,11 +99,11 @@ function editComment(e) {
 function deleteComment() {
 	var commentDeleteInstance = $(this);
 	var commentID = commentDeleteInstance
-		.closest('.comment-container')
+		.closest('.individual-comment-box')
 		.attr('data-commentid');
 	var haikuID = commentDeleteInstance
-		.closest('.comment-list')
-		.siblings('.comment-add')
+		.closest('.comment-scroll-list-box')
+		.siblings('.comment-add-box')
 		.attr('data-haikuid');
 
 	var deleteCommentUrl = '/' + haikuID + '/comment/' + commentID + '/delete';
@@ -113,7 +113,7 @@ function deleteComment() {
 	var votePost = $.post(deleteCommentUrl, data);
 	votePost.done(function() {
 		var commentCounter = commentDeleteInstance
-			.closest('.comment-box')
+			.closest('.comment-box-container')
 			.siblings('.comment-header')
 			.children('p');
 
@@ -121,7 +121,7 @@ function deleteComment() {
 		if (commentCount == 1) {
 			commentCount = '';
 		} else {
-			commentCount = parseInt(commentCount) + 1;
+			commentCount = parseInt(commentCount) - 1;
 		}
 		commentCounter.text(commentCount)
 
@@ -141,7 +141,9 @@ function submitComment(e) {
 	if (commentText == '') {
 		return;
 	}
-	var haikuID = commentInstance.parent().attr('data-haikuid');
+	var haikuID = commentInstance
+		.closest('.comment-add-box')
+		.attr('data-haikuid');
 	var username = getSelfUsername();
 	var data = {
 		'commentText': commentText,
@@ -157,15 +159,13 @@ function submitComment(e) {
 
 		var newComment = buildComment(commentTemplate, commentID, username, commentText);
 		commentInstance
-			.children('.comment-form-box')
-			.children('.new-comment-text')
+			.find('.new-comment-text')
 			.val('');
 		var commentList = commentInstance
-			.parent()
-			.siblings('.comment-list');
+			.closest('.comment-list-box');
 		commentPost.done(function() {
 			var commentCounter = commentList
-				.parent()
+				.closest('.comment-box-container')
 				.siblings('.comment-header')
 				.children('p');
 			var commentCount = commentCounter.text();
