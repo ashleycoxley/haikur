@@ -5,12 +5,12 @@
 	<div class='color-box {{haiku.color}}'>
 		<div class='container'>
 			<div class='haiku-box'>
-				<div class='username-section'>
-					<a href='/user/{{haiku.username}}' class='userpage-link'>
-						{{haiku.username}}
-					</a>
-				</div>
 				<div class='haiku-section'>
+					<div class='username-container'>
+						<a href='/user/{{haiku.username}}' class='userpage-link'>
+							{{haiku.username}}
+						</a>
+					</div>
 					<div class='haiku-container'>
 						<p class='haiku-text {{haiku.width}}'>
 							{{haiku.stanza1}}<br>
@@ -45,12 +45,12 @@
 							{% endif %}
 							<p class='vote-count downvote-count'>{{downvotes}}</p>
 						</div>
-						{% if signedin_username == haiku.username %}
-						<div class='edit-box'>
-							<a href='/{{haiku.key.id()}}/edit' class='edit-link'>EDIT</a>
-						</div>
-						{% endif %}
 					</div>
+					{% if signedin_username == haiku.username %}
+					<div class='edit-box'>
+						<a href='/{{haiku.key.id()}}/edit' class='edit-link'>EDIT</a>
+					</div>
+					{% endif %}
 				</div>
 				<div class='comment-section'>
 					<div class='comment-header'>
