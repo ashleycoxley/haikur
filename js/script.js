@@ -273,26 +273,66 @@ function changeHaikuColor() {
 
 
 $(document).ready(function(e) {
-	// Show/hide comment section
-	$('.comment-icon').on('click', function(e) {
-  		$(this).parent().siblings('.comment-list-container').toggleClass('hide');
-	});
-
 	// Comment scrollbar
-	$(".comment-list-container").niceScroll({
+	$('.comment-list-box').niceScroll({
 		cursorcolor: '#ffffff',
 		cursorwidth: '3px',
 		cursorborder: '0px',
 	});
 
+	// Show/hide comment section
+	$('.comment-icon').on('click', function(e) {
+  		$(this)
+  			.parent()
+  			.siblings('.comment-box-container')
+  			.toggleClass('hide');
+
+  		$('.comment-list-box').getNiceScroll().resize();
+
+  		var shownHeight = $(this)
+  			.parent()
+  			.siblings('.comment-box-container')
+  			.find('.comment-list-box')
+  			.height();
+  		var contentHeight = $(this)
+  			.parent()
+  			.siblings('.comment-box-container')
+  			.find('.comment-list-box')
+  			.prop('scrollHeight');
+  		console.log('shownHeight:', shownHeight)
+  		console.log('contentHeight:', contentHeight)
+  		if (contentHeight > shownHeight) {
+  			$(this)
+  				.parent()
+  				.siblings('.comment-box-container')
+  				.find('.comment-scroll-box')
+  				.toggleClass('hide');
+  		}
+	});
+
+	// Scroll content
+	$('.scroll-up').click(function () {
+    	$('.comment-list-box').scrollTop($('.comment-list-box').scrollTop() - 50);
+	});
+
+	$('.scroll-down').click(function () {
+    	$('.comment-list-box').scrollTop($('.comment-list-box').scrollTop() + 50);
+	});
+
+	// Show/hide comment add
+	$('.comment-add-icon').on('click', function() {
+		console.log('clicked')
+		$(this).parent().siblings('.comment-add').toggleClass('hide');
+	})
+
 	// Submit comment form
 	$('.comment-form').on('submit', submitComment);
 
 	// Edit comment
-	$('.comment-list').on('click', '.comment-edit', displayEditComment);
+	$('.comment-list-box').on('click', '.comment-edit', displayEditComment);
 
 	// Delete comment
-	$('.comment-list').on('click', '.comment-delete', deleteComment);
+	$('.comment-list-box').on('click', '.comment-delete', deleteComment);
 
 	// Post upvote/downvote
 	$('.vote-icon').on('click', upvoteDownvote);

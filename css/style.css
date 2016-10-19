@@ -11,8 +11,8 @@ body {
     display: flex;
     flex-wrap: wrap;
 	padding-top: 10px;
-	padding-right: 100px;
-	padding-left: 100px;
+	padding-right: 80px;
+	padding-left: 80px;
 	max-width: 1100px;
 	margin-left: auto;
 	margin-right: auto;
@@ -30,6 +30,34 @@ a {
 
 .userpage-link {
 	font-size: 14pt;
+}
+
+::-webkit-input-placeholder {
+   color: #000000;
+   opacity: 0.3;
+   font-family: 'Catamaran', sans-serif;
+   font-weight: 500;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #000000;
+   opacity: 0.3;
+   font-family: 'Catamaran', sans-serif;
+   font-weight: 500;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #000000;
+   opacity: 0.3;
+   font-family: 'Catamaran', sans-serif;
+   font-weight: 500;
+}
+
+:-ms-input-placeholder {  
+   color: #000000;
+   opacity: 0.3;
+   font-family: 'Catamaran', sans-serif;
+   font-weight: 500;
 }
 
 
@@ -209,10 +237,34 @@ p {
 	font-size: 10pt;
 }
 
-.comment-list-container {
-	height: 70%;
-	width: 100%;
-	overflow-x: hidden;
+.comment-box-container {
+}
+
+.comment-scroll-list-box {
+	display: flex;
+	max-height: 200px;
+}
+
+.comment-list-box {
+	width: 88%;
+	/*overflow-x: hidden;*/
+}
+
+.comment-scroll-box {
+	width: 12%;
+	position: relative;
+}
+
+.scroll-icon {
+	width: 16px;
+	height: auto;
+	outline: none;
+}
+
+.scroll-down {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
 }
 
 .individual-comment-box {
@@ -220,9 +272,23 @@ p {
 	margin-bottom: 10px;
 }
 
-.comment-edit-box {
+.comment-edit-box, .comment-add-box {
 	display: flex;
-	flex-wrap: wrap;
+}
+
+.comment-add-icon-box {
+	width: 12%;
+}
+
+.comment-add {
+	width: 88%;
+}
+
+.comment-add-icon {
+	width: 16px;
+	height: auto;
+	padding-top: 18px;
+	outline: none;
 }
 
 .comment-edit-button {
@@ -243,7 +309,9 @@ p {
 	border: none;
 	color: white;
 	font-family: 'Catamaran', sans-serif;
+	font-weight: 900;
 	font-size: 12pt;
+	text-decoration: underline;
 	outline: none;
 }
 
@@ -254,7 +322,25 @@ p {
 	font-family: 'Catamaran', sans-serif;
 	font-size: 10pt;
 	width: 95%;
-	height: 40px;
+	height: 50px;
+	background: transparent;
+	resize: none;
+}
+
+.new-comment-text::-webkit-input-placeholder {
+   font-size: 14pt;
+}
+
+.new-comment-text:-moz-placeholder { /* Firefox 18- */
+   font-size: 14pt;
+}
+
+.new-comment-text::-moz-placeholder {  /* Firefox 19+ */
+   font-size: 14pt;
+}
+
+.new-comment-text:-ms-input-placeholder {  
+   font-size: 14pt;
 }
 
 .hide {
@@ -288,6 +374,22 @@ p {
 	padding-top: 5px;
 }
 
+.haiku-input>::-webkit-input-placeholder {
+   font-size: 32pt;
+}
+
+.haiku-input>:-moz-placeholder { /* Firefox 18- */
+   font-size: 32pt;
+}
+
+.haiku-input>::-moz-placeholder {  /* Firefox 19+ */
+   font-size: 32pt;
+}
+
+.haiku-input>:-ms-input-placeholder {  
+   font-size: 32pt;
+}
+
 .five-syllable {
 	height: 60px;
 	width: 600px;
@@ -300,37 +402,6 @@ p {
 	margin-bottom: 15px;
 }
 
-::-webkit-input-placeholder {
-   color: #000000;
-   opacity: 0.3;
-   font-family: 'Catamaran', sans-serif;
-   font-weight: 500;
-   font-size: 32pt;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   color: #000000;
-   opacity: 0.3;
-   font-family: 'Catamaran', sans-serif;
-   font-weight: 500;
-   font-size: 32pt;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color: #000000;
-   opacity: 0.3;
-   font-family: 'Catamaran', sans-serif;
-   font-weight: 500;
-   font-size: 32pt;
-}
-
-:-ms-input-placeholder {  
-   color: #000000;
-   opacity: 0.3;
-   font-family: 'Catamaran', sans-serif;
-   font-weight: 500;
-   font-size: 32pt;
-}
 
 .color-choice {
 	width: 100%;
