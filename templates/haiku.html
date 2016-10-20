@@ -55,6 +55,7 @@
 				<div class='comment-section'>
 					<div class='comment-header'>
 						<input type='image' class='comment-icon' src='/assets/comments.png'>
+						<input type='image' class='comment-icon hide' src='/assets/comments_close.png'>
 						{% set comment_query = Comment.query(Comment.haiku_ref==haiku.key).order(Comment.created_date) %}
 						{% set comment_count = comment_query.count() %}
 						{% if comment_count == 0 %}
@@ -84,10 +85,11 @@
 								{% endfor %}
 							</div>
 						</div>
-						<div class='comment-add-box'  data-haikuid='{{haiku.key.id()|string}}'>
+						<div class='comment-add-box' data-haikuid='{{haiku.key.id()|string}}'>
 							{% if signedin_username != '' %}
 							<div class='comment-add-icon-box'>
-								<input type='image' class='comment-add-icon' src='/assets/comments_close.png'>
+								<input type='image' class='comment-add-icon' src='/assets/add-comment.png'>
+								<input type='image' class='comment-add-icon hide' src='/assets/comments_close.png'>
 							</div>
 							<div class='comment-add hide'>
 								<form class='comment-form' method='post'>

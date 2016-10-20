@@ -30,7 +30,6 @@ var commentInputTemplate = "<form method='post'>" +
 	"</div>" +
 	"<div class='form-footer'>" +
 	"	<div class='button-box'>" +
-	"		<img src='/assets/comments_close.png' class='comment-edit-button close-comment-edit'>" +
 	"		<input type='submit' value='SUBMIT' class='comment-button'>" +
 	"	</div>" +
 	"</div>" +
@@ -288,41 +287,13 @@ $(document).ready(function(e) {
   			.toggleClass('hide');
 
   		$('.comment-list-box').getNiceScroll().resize();
-
-  		var shownHeight = $(this)
-  			.parent()
-  			.siblings('.comment-box-container')
-  			.find('.comment-list-box')
-  			.height();
-  		var contentHeight = $(this)
-  			.parent()
-  			.siblings('.comment-box-container')
-  			.find('.comment-list-box')
-  			.prop('scrollHeight');
-  		console.log('shownHeight:', shownHeight)
-  		console.log('contentHeight:', contentHeight)
-  		if (contentHeight > shownHeight) {
-  			$(this)
-  				.parent()
-  				.siblings('.comment-box-container')
-  				.find('.comment-scroll-box')
-  				.toggleClass('hide');
-  		}
-	});
-
-	// Scroll content
-	$('.scroll-up').click(function () {
-    	$('.comment-list-box').scrollTop($('.comment-list-box').scrollTop() - 50);
-	});
-
-	$('.scroll-down').click(function () {
-    	$('.comment-list-box').scrollTop($('.comment-list-box').scrollTop() + 50);
 	});
 
 	// Show/hide comment add
 	$('.comment-add-icon').on('click', function() {
-		console.log('clicked')
 		$(this).parent().siblings('.comment-add').toggleClass('hide');
+		$(this).toggleClass('hide');
+		$(this).siblings('.comment-add-icon').toggleClass('hide');
 	})
 
 	// Submit comment form
